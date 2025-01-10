@@ -175,7 +175,7 @@
                 </li> --}}
 
                 <li class="nav-item dropdown">
-                    {{-- <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
                         {{ auth()->user()->name }} <span class="caret"></span>
                     </a>
                     <div class="dropdown-menu" style="">
@@ -186,7 +186,7 @@
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                             @csrf
                         </form>
-                    </div> --}}
+                    </div>
                 </li>
 
                 {{-- <li class="nav-item">
