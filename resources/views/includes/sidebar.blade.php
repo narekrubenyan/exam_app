@@ -3,7 +3,7 @@
 
         <li class="nav-item">
             <a href="{{ route('questions.index') }}" class="nav-link">
-                <p>Հարցեր</p>
+                <p>{{ __('questions.questions') }}</p>
             </a>
         </li>
         {{-- <li class="nav-item">

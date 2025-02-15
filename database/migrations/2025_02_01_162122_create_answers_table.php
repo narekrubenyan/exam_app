@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('answers', function (Blueprint $table) {
             $table->id();
             $table->string(column: 'text');
-            $table->boolean(column: 'is_right')->nullable();
+            $table->boolean(column: 'is_right')->default(0);
             $table->unsignedBigInteger(column: 'question_id');
             $table->timestamps();
         });

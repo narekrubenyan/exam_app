@@ -181,7 +181,7 @@
                     <div class="dropdown-menu" style="">
                         <a class="dropdown-item" href="{{ route('logout') }}"
                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                            {{ __('Logout') }}
+                            {{ __('dashboard.logout') }}
                         </a>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                             @csrf
@@ -211,7 +211,7 @@
             <a href="{{ route('dashboard') }}" class="brand-link">
                 <img src="{{ asset('dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo"
                     class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light pl-4">Համակարգ</span>
+                <span class="brand-text font-weight-light pl-4">{{ __('dashboard.system') }}</span>
             </a>
 
             <!-- Sidebar -->

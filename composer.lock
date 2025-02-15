@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "dcbbd52cf3c38d0f1b88e12d39e47db7",
+    "content-hash": "3388e39c92586b917df8bf66c545b145",
     "packages": [
         {
             "name": "brick/math",
@@ -8137,6 +8137,53 @@
             "time": "2024-09-25T14:18:03+00:00"
         },
         {
+            "name": "theanik/laravel-more-command",
+            "version": "v1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/theanik/laravel-more-command.git",
+                "reference": "a6c4144c5ca7839cce7fd969bcffb9181c1e088e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/theanik/laravel-more-command/zipball/a6c4144c5ca7839cce7fd969bcffb9181c1e088e",
+                "reference": "a6c4144c5ca7839cce7fd969bcffb9181c1e088e",
+                "shasum": ""
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Theanik\\LaravelMoreCommand\\LaravelMoreCommandProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Theanik\\LaravelMoreCommand\\": "src/"
+                },
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Anwar Hossain Anik",
+                    "email": "anwar.anik33@gmail.com"
+                }
+            ],
+            "description": "Create a Repository and Service class and trait using Artisan CLI",
+            "support": {
+                "issues": "https://github.com/theanik/laravel-more-command/issues",
+                "source": "https://github.com/theanik/laravel-more-command/tree/v1.3.0"
+            },
+            "time": "2022-02-21T16:53:24+00:00"
+        },
+        {
             "name": "theseer/tokenizer",
             "version": "1.2.3",
             "source": {
@@ -8185,6 +8232,66 @@
                 }
             ],
             "time": "2024-03-03T12:36:25+00:00"
+        },
+        {
+            "name": "timwassenburg/laravel-service-generator",
+            "version": "v1.0.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/timwassenburg/laravel-service-generator.git",
+                "reference": "9fcd0e48d418f36c94efcb1917062fa9ea7a0fcc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/timwassenburg/laravel-service-generator/zipball/9fcd0e48d418f36c94efcb1917062fa9ea7a0fcc",
+                "reference": "9fcd0e48d418f36c94efcb1917062fa9ea7a0fcc",
+                "shasum": ""
+            },
+            "require-dev": {
+                "laravel/pint": "^1.10",
+                "nunomaduro/larastan": "^2.0",
+                "orchestra/testbench": "^8.5",
+                "pestphp/pest": "^2.5"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "TimWassenburg\\ServiceGenerator\\Http\\Providers\\CommandServiceProvider",
+                        "TimWassenburg\\ServiceGenerator\\ServiceGeneratorServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "TimWassenburg\\ServiceGenerator\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Tim Wassenburg"
+                }
+            ],
+            "description": "Generate Laravel services",
+            "homepage": "https://github.com/timwassenburg/laravel-service-generator",
+            "keywords": [
+                "artisan",
+                "cli",
+                "generator",
+                "laravel",
+                "pattern",
+                "php",
+                "services"
+            ],
+            "support": {
+                "issues": "https://github.com/timwassenburg/laravel-service-generator/issues",
+                "source": "https://github.com/timwassenburg/laravel-service-generator/tree/v1.0.5"
+            },
+            "time": "2023-04-27T09:49:57+00:00"
         }
     ],
     "aliases": [],

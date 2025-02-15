@@ -4,10 +4,16 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Models\Question;
 use Illuminate\Http\Request;
+use App\Services\QuestionService;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\QuestionRequest;
 
 class QuestionController extends Controller
 {
+    public function __construct(
+        private ?QuestionService $questionService = null,
+    ) {}
+
     /**
      * Display a listing of the resource.
      */
@@ -29,17 +35,13 @@ class QuestionController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(QuestionRequest $request)
     {
-        //
-    }
+        $data = $request->validated();
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
+        $this->questionService->create($data);
+
+        return redirect()->route('questions.index');
     }
 
     /**
@@ -47,15 +49,21 @@ class QuestionController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $question = Question::with('answers', 'statements')->find($id);
+
+        return view('dashboard.questions.edit', compact('question'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(QuestionRequest $request, Question $question)
     {
-        //
+        $data = $request->validated();
+
+        $this->questionService->update($question, $data);
+
+        return redirect()->route('questions.index');
     }
 
     /**
@@ -63,6 +71,8 @@ class QuestionController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $this->questionService->delete($id);
+
+        return redirect()->route('questions.index');
     }
 }
