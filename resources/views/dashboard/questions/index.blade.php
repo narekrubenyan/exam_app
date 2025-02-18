@@ -42,7 +42,7 @@
                                         <th>#</th>
                                         <th>{{ __('dashboard.id') }}</th>
                                         <th>{{ __('dashboard.questions.question') }}</th>
-                                        <th>{{ __('dashboard.questions.change') }}</th>
+                                        <th>{{ __('dashboard.change') }}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -52,12 +52,12 @@
                                             <td>{{ $question->id }}</td>
                                             <td>{{ $question->title }}</td>
                                             <td>
-                                                <span><a href="{{ route('questions.edit', $question->id) }}" class="btn btn-warning">{{ __('dashboard.questions.edit') }}</a></span>
+                                                <span><a href="{{ route('questions.edit', $question->id) }}" class="btn btn-warning">{{ __('dashboard.edit') }}</a></span>
                                                 <span>
                                                     <form action="{{ route('questions.destroy', $question->id) }}" method="POST" class="d-inline-block">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <input type="submit" value="{{ __('dashboard.questions.delete') }}" class="btn btn-danger">
+                                                        <input type="submit" value="{{ __('dashboard.delete') }}" class="btn btn-danger">
                                                     </form>
                                                 </span>
                                             </td>

@@ -21,6 +21,8 @@ Route::prefix('dashboard')
     Route::resource('questions', QuestionController::class);
     Route::resource('tests', TestController::class);
 
+    Route::post('tests/generate', [TestController::class, 'generate'])->name('tests.generate');
+
 });
 
 Route::get('/test', function () {

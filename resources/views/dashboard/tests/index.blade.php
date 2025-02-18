@@ -27,7 +27,10 @@
                         <h3 class="card-title">{{ __('dashboard.tests.testsTable') }}</h3>
                         <div class="card-tools">
                             <div>
-                                <a href="{{ route('tests.create') }}" class="btn btn-block btn-primary">{{ __('dashboard.tests.add') }}</a>
+                                <form action="{{ route('tests.generate') }}" method="POST" class="d-inline-block">
+                                    @csrf
+                                    <input type="submit" value="{{ __('dashboard.tests.generate') }}" class="btn btn-success">
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -41,23 +44,16 @@
                                     <tr>
                                         <th>#</th>
                                         <th>{{ __('dashboard.tests.test') }}</th>
-                                        <th>{{ __('dashboard.questions.change') }}</th>
+                                        <th>{{ __('dashboard.change') }}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($tests as $testt)
+                                    @foreach ($tests as $test)
                                         <tr>
                                             <td>{{ $loop->iteration }}.</td>
                                             <td>{{ $test->title }}</td>
                                             <td>
-                                                <span><a href="{{ route('tests.edit', $test->id) }}" class="btn btn-warning">{{ __('dashboard.tests.edit') }}</a></span>
-                                                <span>
-                                                    <form action="{{ route('tests.destroy', $test->id) }}" method="POST" class="d-inline-block">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <input type="submit" value="{{ __('dashboard.questions.delete') }}" class="btn btn-danger">
-                                                    </form>
-                                                </span>
+                                                <a href="{{ route('tests.show', $test->id) }}" class="btn btn-info">{{ __('dashboard.view') }}</a>
                                             </td>
                                         </tr>
                                     @endforeach
