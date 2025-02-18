@@ -12,6 +12,13 @@ class Test extends Model
     use HasFactory;
 
     /**
+     * timestamps
+     *
+     * @var bool
+     */
+    public $timestamps = false;
+
+    /**
      * fillable
      *
      * @var array
