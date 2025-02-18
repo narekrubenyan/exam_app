@@ -19,6 +19,11 @@
 
     <section class="content">
         <div class="container-fluid">
+
+            @if($errors->any())
+                <h4 class="text-danger">{{$errors->first()}}</h4>
+            @endif
+
             <div class="row">
                 <div class="col-12">
                     <form  method="POST" action="{{ route('questions.store') }}" enctype="multipart/form-data">

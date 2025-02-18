@@ -6,6 +6,7 @@ use App\Models\Question;
 use Illuminate\Http\Request;
 use App\Services\QuestionService;
 use App\Http\Controllers\Controller;
+use Illuminate\Pagination\Paginator;
 use App\Http\Requests\QuestionRequest;
 
 class QuestionController extends Controller
@@ -19,7 +20,12 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        $questions = Question::all();
+        $questions = Question::paginate(30);
+
+        $currentPage = Paginator::resolveCurrentPage();
+        if ($currentPage > $questions->lastPage()) {
+            return redirect()->route('questions.index', ['page' => 1]);
+        }
 
         return view('dashboard.questions.index', compact('questions'));
     }

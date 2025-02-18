@@ -3,9 +3,16 @@
 
         <li class="nav-item">
             <a href="{{ route('questions.index') }}" class="nav-link">
-                <p>{{ __('questions.questions') }}</p>
+                <p>{{ __('dashboard.questions.questions') }}</p>
             </a>
         </li>
+
+        <li class="nav-item">
+            <a href="{{ route('tests.index') }}" class="nav-link">
+                <p>{{ __('dashboard.tests.tests') }}</p>
+            </a>
+        </li>
+
         {{-- <li class="nav-item">
             <a href="{{ route('categories.index') }}" class="nav-link">
                 <i class="nav-icon fas fa-window-restore"></i>
