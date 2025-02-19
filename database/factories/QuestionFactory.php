@@ -31,11 +31,20 @@ class QuestionFactory extends Factory
         ];
     }
 
-    public function withRelations()
+    /**
+     * configure
+     *
+     * @return void
+     */
+    public function configure()
     {
         return $this->afterCreating(function (Question $question) {
-            Statement::factory(5)->create(['question_id' => $question->id]); // Create 5 comments
-            Answer::factory(5)->create(['question_id' => $question->id]); // Create 5 tags
+            if (rand(0, 1)) { // 50% chance to create 5 statements
+                Statement::factory(5)->create(['question_id' => $question->id]);
+            }
+
+            // Always create 5 answers
+            Answer::factory(5)->create(['question_id' => $question->id]);
         });
     }
 }

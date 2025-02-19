@@ -17,14 +17,4 @@ class TestQuestions extends Model
      * @var array
      */
     protected $fillable = ['test_id', 'question_id'];
-
-    /**
-     * Get the test that owns the TestQuestions
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function test(): BelongsTo
-    {
-        return $this->belongsTo(Test::class);
-    }
 }

@@ -6,6 +6,7 @@ use App\Models\Question;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Test extends Model
 {
@@ -26,12 +27,12 @@ class Test extends Model
     protected $fillable = ['title'];
 
     /**
-     * Get all of the questions for the Test
+     * The questions that belong to the Test
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function questions(): HasMany
+    public function questions(): BelongsToMany
     {
-        return $this->hasMany(Question::class);
+        return $this->belongsToMany(Question::class, 'test_questions', 'test_id', 'question_id');
     }
 }
