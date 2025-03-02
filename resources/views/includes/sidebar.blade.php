@@ -13,70 +13,11 @@
             </a>
         </li>
 
-        {{-- <li class="nav-item">
-            <a href="{{ route('categories.index') }}" class="nav-link">
-                <i class="nav-icon fas fa-window-restore"></i>
-                <p>
-                    Categories
-                </p>
+        <li class="nav-item">
+            <a href="{{ route('students.index') }}" class="nav-link">
+                <p>{{ __('dashboard.students.students') }}</p>
             </a>
         </li>
-        <li class="nav-item">
-            <a href="{{ route('subcategories.index') }}" class="nav-link">
-                <i class="nav-icon fas fa-cubes"></i>
-                <p>
-                    Subcategories
-                </p>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="{{ route('partners.index') }}" class="nav-link">
-                <i class="nav-icon fas fa-handshake"></i>
-                <p>
-                    Partners
-                </p>
-            </a>
-        </li>
-
-        @can('view', auth()->user())
-            <div class="nav-tabs"></div>
-            <li class="nav-item">
-                <a href="{{ route('users.index') }}" class="nav-link">
-                    <i class="nav-icon fas fa-users-cog"></i>
-                    <p>
-                        Users
-                    </p>
-                </a>
-            </li>
-        @endcan
-
-        <div class="nav-tabs"></div>
-        @can('view', auth()->user())
-            <li class="nav-item">
-                <a href="{{ route('inquiries') }}" class="nav-link">
-                    <i class="nav-icon fas fa-window-restore"></i>
-                    <p>
-                        Inquiries
-                    </p>
-                </a>
-            </li>
-        @endcan
-        <li class="nav-item">
-            <a href="{{ route('customers.index') }}" class="nav-link">
-                <i class="nav-icon fas fa-child"></i>
-                <p>
-                    Customers
-                </p>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="{{ route('opportunities.index') }}" class="nav-link">
-                <i class="nav-icon fas fa-handshake"></i>
-                <p>
-                    Opportunities
-                </p>
-            </a>
-        </li> --}}
 
     </ul>
 </nav>

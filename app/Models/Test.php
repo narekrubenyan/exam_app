@@ -35,4 +35,14 @@ class Test extends Model
     {
         return $this->belongsToMany(Question::class, 'test_questions', 'test_id', 'question_id');
     }
+
+    /**
+     * Get all of the students for the Test
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function students(): HasMany
+    {
+        return $this->hasMany(Student::class);
+    }
 }

@@ -10,6 +10,7 @@ return [
     'change' => 'փոփոխություն',
     'edit' => 'խմբագրել',
     'delete' => 'հեռացնել',
+    'submit' => 'Հաստատել',
 
     'questions' => [
         'question' => 'Հարց',
@@ -19,8 +20,7 @@ return [
         'editQuestion' => 'Խմբագրել հարցը',
         'statement' => 'Պնդում',
         'statements' => 'Պնդումներ',
-        'answers' => 'Պատասխաններ',
-        'submit' => 'Հաստատել'
+        'answers' => 'Պատասխաններ'
     ],
 
     'tests' => [
@@ -30,5 +30,18 @@ return [
         'add' => 'Ավելացնել թեստ',
         'edit' => 'Խմբագրել թեստը',
         'generate' => 'Գեներացնել նոր թեստեր',
+    ],
+
+    'students' => [
+        'students' => 'ՈՒսանողներ',
+        'student' => 'ՈՒսանող',
+        'studentsTable' => 'ՈՒսանողների աղյուսակ',
+
+        'name' => 'Անուն',
+        'surname' => 'Ազգանուն',
+        'group' => 'Խումբ',
+
+        'addStudent' => 'Ավելացնել ուսանող',
+        'editStudent' => 'Խմբագրել',
     ],
 ];

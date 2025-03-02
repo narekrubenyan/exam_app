@@ -125,7 +125,7 @@
                             </div>
 
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-primary">{{ __('dashboard.questions.submit') }}</button>
+                                <button type="submit" class="btn btn-primary">{{ __('dashboard.submit') }}</button>
                             </div>
                         </div>
                     </form>

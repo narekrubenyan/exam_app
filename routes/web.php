@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ExamController;
+use App\Http\Controllers\StudentAuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,3 +20,11 @@ Auth::routes(options: [
     'reset' => false, // Password Reset Routes...
     'verify' => false, // Email Verification Routes...
 ]);
+
+Route::get('/student/login', [StudentAuthController::class, 'showLoginForm']);
+Route::post('/student/login', [StudentAuthController::class, 'login']);
+Route::post('/student/logout', [StudentAuthController::class, 'logout'])->name('student.logout');
+
+Route::get('/exam/start', [ExamController::class, 'start'])
+    ->name('exam.start')
+    ->middleware('student.auth');
