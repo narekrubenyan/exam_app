@@ -25,6 +25,9 @@ Route::get('/student/login', [StudentAuthController::class, 'showLoginForm']);
 Route::post('/student/login', [StudentAuthController::class, 'login']);
 Route::post('/student/logout', [StudentAuthController::class, 'logout'])->name('student.logout');
 
-Route::get('/exam/start', [ExamController::class, 'start'])
-    ->name('exam.start')
-    ->middleware('student.auth');
+Route::middleware('student.auth')->group(function () {
+    Route::get('/exam', [ExamController::class, 'start'])->name('exam.start');
+    Route::get('/exam/question', [ExamController::class, 'question'])->name('exam.question');
+    Route::post('/exam/submit', [ExamController::class, 'submit'])->name('exam.submit');
+    Route::get('/exam/result', [ExamController::class, 'result'])->name('exam.result');
+});

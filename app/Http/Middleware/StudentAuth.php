@@ -16,9 +16,10 @@ class StudentAuth
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!Session::has('student_id')) {
-            return redirect('/student/login');
+        if (!session('student_id')) {
+            return redirect()->route('student.login')->withErrors(['error' => 'Please log in first']);
         }
+
         return $next($request);
     }
 }

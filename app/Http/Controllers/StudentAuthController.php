@@ -32,7 +32,11 @@ class StudentAuthController extends Controller
             $student->save();
         }
 
-        session(['student_id' => $student->id, 'test_id' => $student->test_id]);
+        session([
+            'student_id' => $student->id,
+            'test_id' => $student->test_id,
+            'student_naem' => $student->name
+        ]);
 
         return redirect()->route('exam.start');
     }

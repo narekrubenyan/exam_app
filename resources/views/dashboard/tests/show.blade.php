@@ -42,9 +42,12 @@
                                         </td>
                                         <td>
                                             <div class="post">
-                                                <p>
-                                                    {{ $question->title }}
-                                                </p>
+                                                <div>
+                                                    <h5>{{ __('dashboard.questions.question') }}</h5>
+                                                    <p>
+                                                        {{ $question->title }}
+                                                    </p>
+                                               </div>
 
                                                 @if (count($question->statements))
                                                     <h6>{{ __('dashboard.questions.statements') }}</h6>
@@ -63,9 +66,9 @@
                                                 <div>
                                                     <ol>
                                                         @foreach ($question->answers as $answer)
-
-                                                            <li>{{ $answer->text }}</li>
-
+                                                            <li @if ($answer->is_right) @class(['text-success']) @endif>
+                                                                {{ $answer->text }}
+                                                            </li>
                                                         @endforeach
                                                     </ol>
                                                 </div>
