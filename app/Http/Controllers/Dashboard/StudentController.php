@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dashboard;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StudentRequest;
 
 class StudentController extends Controller
 {
@@ -29,15 +30,11 @@ class StudentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StudentRequest $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'surname' => 'required|string|max:255',
-            'group' => 'required|string|max:255',
-        ]);
+        $data = $request->validated();
 
-        Student::create($request->all());
+        Student::create($data);
 
         return redirect()->route('students.index')->with('success', __('messages.student.added'));
 

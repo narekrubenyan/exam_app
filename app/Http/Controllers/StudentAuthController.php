@@ -26,36 +26,34 @@ class StudentAuthController extends Controller
             return back()->withErrors(['error' => __('messages.student.not_found')]);
         }
 
-        // Assign a test if the student doesn't already have one
         if (!$student->test_id) {
             $student->test_id = $this->assignTest();
             $student->save();
         }
 
+        session(['student_id' => $student->id, 'test_id' => $student->test_id]);
+
+        $questions = $student->test->questions()->pluck('questions.id')->toArray();
         session([
-            'student_id' => $student->id,
-            'test_id' => $student->test_id,
-            'student_naem' => $student->name
+            'exam_questions' => $questions,
+            'current_index' => 0,
+            'correct_answers' => 0
         ]);
 
-        return redirect()->route('exam.start');
+        return redirect()->route('exam.question', ['index' => 0]);
     }
 
-    // Function to assign tests equally
     private function assignTest()
     {
-        // Get all test IDs
         $testIds = Test::pluck('id')->toArray();
 
-        // Count how many students have each test assigned
         $testCounts = Student::select('test_id')
             ->whereNotNull('test_id')
             ->groupBy('test_id')
             ->selectRaw('test_id, COUNT(*) as count')
             ->pluck('count', 'test_id');
 
-        // Find the test with the least students assigned
-        $minTest = $testIds[0]; // Default to first test
+        $minTest = $testIds[0];
         $minCount = $testCounts[$minTest] ?? 0;
 
         foreach ($testIds as $testId) {

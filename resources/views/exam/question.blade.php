@@ -1,50 +1,72 @@
 @extends('layouts.exam')
 
 @section('content')
-<div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card shadow-lg">
-                <div class="card-header bg-primary text-white">
-                    <h5 class="mb-0">{{ __('dashboard.questions.question') }} {{ $index + 1 }}</h5>
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Question {{ $index + 1 }} of {{ $total }}</h4>
+            <p>{{ $question->text }}</p>
+
+            @if($question->statements)
+                <ul>
+                    @foreach($question->statements as $statement)
+                        <li>{{ $statement->text }}</li>
+                    @endforeach
+                </ul>
+            @endif
+
+            @php
+                $answered = session('answered_questions', []);
+                $submittedAnswer = $answered[$question->id]['selected'] ?? null;
+                $wasCorrect = $answered[$question->id]['correct'] ?? null;
+            @endphp
+
+            <form method="POST" action="{{ route('exam.submit') }}">
+                @csrf
+                <input type="hidden" name="question_id" value="{{ $question->id }}">
+                <input type="hidden" name="current_index" value="{{ $index }}">
+
+                @foreach($question->answers as $answer)
+                    @php $inputId = "answer_{$question->id}_{$answer->id}"; @endphp
+                    <div class="form-check">
+                        <input
+                            class="form-check-input"
+                            type="radio"
+                            id="{{ $inputId }}"
+                            name="answer"
+                            value="{{ $answer->id }}"
+                            {{ $submittedAnswer == $answer->id ? 'checked' : '' }}
+                            {{ isset($submittedAnswer) ? 'disabled' : '' }}
+                            required
+                        >
+                        <label class="form-check-label" for="{{ $inputId }}">{{ $answer->text }}</label>
+                    </div>
+                @endforeach
+
+                @if(!isset($submittedAnswer))
+                    <button type="submit" class="btn btn-primary mt-3">{{ __('dashboard.submit') }}</button>
+                @endif
+            </form>
+
+            @if(isset($submittedAnswer))
+                <div class="alert mt-3 {{ $wasCorrect ? 'alert-success' : 'alert-danger' }}">
+                    {{ $wasCorrect ? '✅ Correct!' : '❌ Incorrect!' }}
                 </div>
-                <div class="card-body">
-                    <!-- Question Text -->
-                    <h5 class="mb-3">{{ $question->text }}</h5>
+            @endif
 
-                    <!-- Statements (if any) -->
-                    @if ($question->statements->isNotEmpty())
-                        <div class="alert alert-info">
-                            <strong>{{ __('dashboard.questions.statements') }}</strong>
-                            <ol class="mb-0">
-                                @foreach ($question->statements as $key => $statement)
-                                    <li>{{ $statement->text }}</li>
-                                @endforeach
-                            </ol>
-                        </div>
-                    @endif
+            <div class="mt-3">
+                @if($index > 0)
+                    <a href="{{ route('exam.question', ['index' => $index - 1]) }}" class="btn btn-secondary">{{ __('pagination.previous') }}</a>
+                @endif
+                @if($index < $total - 1)
+                    <a href="{{ route('exam.question', ['index' => $index + 1]) }}" class="btn btn-primary">{{ __('pagination.next') }}</a>
+                @else
+                    <a href="{{ route('exam.results') }}" class="btn btn-success">{{ __('exam.finish') }}</a>
+                @endif
+            </div>
 
-                    <!-- Answer Options -->
-                    <form method="POST" action="{{ route('exam.submit') }}">
-                        @csrf
-                        <input type="hidden" name="question_id" value="{{ $question->id }}">
-
-                        <div class="mb-3">
-                            @foreach ($question->answers as $answer)
-                                <div class="form-check">
-                                    <input id="q-{{ $answer->id }}" type="radio" class="form-check-input" name="selected_answer" value="{{ $answer->id }}" required>
-                                    <label for="q-{{ $answer->id }}" class="form-check-label">{{ $answer->text }}</label>
-                                </div>
-                            @endforeach
-                        </div>
-
-                        <!-- Next Button -->
-                        <div class="d-flex justify-content-between">
-                            <span class="text-muted">{{ __('dashboard.questions.question') }} {{ $index + 1 }} ( {{ count(session('exam_questions')) }} )</span>
-                            <button type="submit" class="btn btn-primary">{{ __('dashboard.exam.next') }} <i class="fas fa-arrow-right"></i></button>
-                        </div>
-                    </form>
-                </div>
+            <div class="mt-3">
+                <strong>{{ __('exam.totalCorrectAnswers') }}</strong> {{ session('correct_answers', 0) }}
             </div>
         </div>
     </div>

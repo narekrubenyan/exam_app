@@ -27,7 +27,7 @@ Route::post('/student/logout', [StudentAuthController::class, 'logout'])->name('
 
 Route::middleware('student.auth')->group(function () {
     Route::get('/exam', [ExamController::class, 'start'])->name('exam.start');
-    Route::get('/exam/question', [ExamController::class, 'question'])->name('exam.question');
-    Route::post('/exam/submit', [ExamController::class, 'submit'])->name('exam.submit');
-    Route::get('/exam/result', [ExamController::class, 'result'])->name('exam.result');
+    Route::get('/exam/question/{index}', [ExamController::class, 'showQuestion'])->name('exam.question');
+    Route::post('/exam/submit', [ExamController::class, 'submitAnswer'])->name('exam.submit');
+    Route::get('/exam/result', [ExamController::class, 'result'])->name('exam.results');
 });
