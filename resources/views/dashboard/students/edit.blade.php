@@ -43,8 +43,8 @@
                             </div>
 
                             <div class="form-group">
-                                <label>{{ __('dashboard.students.group') }}</label>
-                                <input type="text" name="group" class="form-control" value="{{ $student->group }}" required>
+                                <label>{{ __('dashboard.students.login_code') }}</label>
+                                <input type="text" name="login_code" class="form-control" value="{{ $student->login_code }}" required>
                             </div>
                         </div>
 

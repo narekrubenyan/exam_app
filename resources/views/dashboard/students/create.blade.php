@@ -33,16 +33,25 @@
                             <div class="form-group">
                                 <label>{{ __('dashboard.students.name') }}</label>
                                 <input type="text" name="name" class="form-control" required>
+                                @error('name')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             <div class="form-group">
                                 <label>{{ __('dashboard.students.surname') }}</label>
                                 <input type="text" name="surname" class="form-control" required>
+                                @error('surname')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             <div class="form-group">
-                                <label>{{ __('dashboard.students.group') }}</label>
-                                <input type="text" name="group" class="form-control" required>
+                                <label>{{ __('dashboard.students.login_code') }}</label>
+                                <input type="text" name="login_code" class="form-control" required>
+                                @error('login_code')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
 

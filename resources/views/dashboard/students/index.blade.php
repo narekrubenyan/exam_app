@@ -47,7 +47,7 @@
                                     <th>#</th>
                                     <th>{{ __('dashboard.students.name') }}</th>
                                     <th>{{ __('dashboard.students.surname') }}</th>
-                                    <th>{{ __('dashboard.students.group') }}</th>
+                                    <th>{{ __('dashboard.students.login_code') }}</th>
                                     <th>{{ __('dashboard.change') }}</th>
                                 </tr>
                             </thead>
@@ -57,7 +57,7 @@
                                         <td>{{ $loop->iteration }}.</td>
                                         <td>{{ $student->name }}</td>
                                         <td>{{ $student->surname }}</td>
-                                        <td>{{ $student->group }}</td>
+                                        <td>{{ $student->login_code }}</td>
                                         <td>
                                             <span><a href="{{ route('students.edit', $student->id) }}" class="btn btn-warning">{{ __('dashboard.edit') }}</a></span>
                                             <span>
@@ -80,69 +80,6 @@
                 @endif
             </div>
         </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        {{-- <a href="{{ route('students.create') }}" class="btn btn-success mb-3">Add Student</a>
-
-        @if(session('success'))
-            <div class="alert alert-success">{{ session('success') }}</div>
-        @endif
-
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Surname</th>
-                    <th>Group</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($students as $student)
-                <tr>
-                    <td>{{ $student->id }}</td>
-                    <td>{{ $student->name }}</td>
-                    <td>{{ $student->surname }}</td>
-                    <td>{{ $student->group }}</td>
-                    <td>
-                        <a href="{{ route('students.edit', $student->id) }}" class="btn btn-primary btn-sm">Edit</a>
-                        <form action="{{ route('students.destroy', $student->id) }}" method="POST" style="display:inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</button>
-                        </form>
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table> --}}
-
-
     </div>
 </section>
 

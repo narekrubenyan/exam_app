@@ -21,7 +21,7 @@ Auth::routes(options: [
     'verify' => false, // Email Verification Routes...
 ]);
 
-Route::get('/student/login', [StudentAuthController::class, 'showLoginForm']);
+Route::get('/', [StudentAuthController::class, 'showLoginForm']);
 Route::post('/student/login', [StudentAuthController::class, 'login']);
 Route::post('/student/logout', [StudentAuthController::class, 'logout'])->name('student.logout');
 

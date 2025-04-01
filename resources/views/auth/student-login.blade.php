@@ -9,7 +9,6 @@
 <body class="bg-light">
     <div class="container d-flex justify-content-center align-items-center vh-100">
         <div class="card shadow-lg p-4 w-50">
-            <h3 class="text-center mb-4">Student Login</h3>
             @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul class="mb-0">
@@ -22,21 +21,21 @@
             <form method="POST" action="/student/login">
                 @csrf
                 <div class="form-group">
-                    <label for="name">Name:</label>
+                    <label for="name">{{ __('dashboard.students.name') }}:</label>
                     <input type="text" class="form-control" id="name" name="name" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="surname">Surname:</label>
+                    <label for="surname">{{ __('dashboard.students.surname') }}:</label>
                     <input type="text" class="form-control" id="surname" name="surname" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="group">Group:</label>
+                    <label for="group">{{ __('dashboard.students.login_code') }}:</label>
                     <input type="text" class="form-control" id="group" name="group" required>
                 </div>
 
-                <button type="submit" class="btn btn-primary btn-block">Login</button>
+                <button type="submit" class="btn btn-primary btn-block">{{ __('auth.login') }}</button>
             </form>
         </div>
     </div>

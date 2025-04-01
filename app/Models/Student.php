@@ -16,7 +16,7 @@ class Student extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'surname', 'group', 'test_id'];
+    protected $fillable = ['name', 'surname', 'login_code', 'test_id'];
 
     /**
      * Get the test that owns the Student

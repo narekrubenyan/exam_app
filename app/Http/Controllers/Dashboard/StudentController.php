@@ -37,7 +37,6 @@ class StudentController extends Controller
         Student::create($data);
 
         return redirect()->route('students.index')->with('success', __('messages.student.added'));
-
     }
 
     /**
@@ -53,16 +52,12 @@ class StudentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(StudentRequest $request, string $id)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'surname' => 'required|string|max:255',
-            'group' => 'required|string|max:255',
-        ]);
+        $data = $request->validated();
 
         $student = Student::findOrFail($id);
-        $student->update($request->all());
+        $student->update($data);
 
         return redirect()->route('students.index')->with('success', __('messages.student.updated'));
     }

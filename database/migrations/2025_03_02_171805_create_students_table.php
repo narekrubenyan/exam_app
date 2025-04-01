@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('surname');
-            $table->string('group');
+            $table->string('login_code');
             $table->unsignedBigInteger('test_id')->nullable()->default(null);
             $table->timestamps();
         });

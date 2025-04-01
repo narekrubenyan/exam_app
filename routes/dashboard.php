@@ -8,9 +8,9 @@ use App\Http\Controllers\Dashboard\QuestionController;
 use App\Http\Controllers\Dashboard\DashboardController;
 
 
-Route::get(uri: '/', action: function (): RedirectResponse {
-    return redirect()->route(route: 'dashboard');
-});
+// Route::get(uri: '/', action: function (): RedirectResponse {
+//     return redirect()->route(route: 'dashboard');
+// });
 
 
 Route::prefix('dashboard')

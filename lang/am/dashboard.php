@@ -40,7 +40,7 @@ return [
 
         'name' => 'Անուն',
         'surname' => 'Ազգանուն',
-        'group' => 'Խումբ',
+        'login_code' => 'Մուտքի կոդ',
 
         'addStudent' => 'Ավելացնել ուսանող',
         'editStudent' => 'Խմբագրել',
