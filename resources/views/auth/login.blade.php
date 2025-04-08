@@ -11,20 +11,6 @@
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
-                        @if ($errors->any())
-
-                            @dump($errors)
-
-                            <div class="alert alert-danger">
-                                <ul class="mb-0">
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
-
-
                         <div class="row mb-3">
                             <label for="username" class="col-md-4 col-form-label text-md-end">{{ __('auth.userName') }}</label>
 
