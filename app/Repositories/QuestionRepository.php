@@ -16,7 +16,8 @@ class QuestionRepository
 
         try {
             $question = Question::create([
-                'title' => $data['title']
+                'title' => $data['title'],
+                'category_id' => $data['category_id']
             ]);
 
             foreach ($data['answers'] as $answerData) {
@@ -57,7 +58,8 @@ class QuestionRepository
 
         try {
             $question->update([
-                'title' => $data['title']
+                'title' => $data['title'],
+                'category_id' => $data['category_id']
             ]);
 
             Answer::where('question_id', $question->id)->delete();

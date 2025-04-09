@@ -2,8 +2,11 @@
 
 namespace App\Models;
 
+use App\Models\Test;
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
@@ -16,7 +19,7 @@ class Question extends Model
      *
      * @var array
      */
-    protected $fillable = ['title'];
+    protected $fillable = ['title', 'category_id'];
 
     /**
      * Get all of the answers for the Question
@@ -36,6 +39,16 @@ class Question extends Model
     public function statements(): HasMany
     {
         return $this->hasMany(Statement::class);
+    }
+
+    /**
+     * Get the category that owns the Question
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(Category::class);
     }
 
     /**

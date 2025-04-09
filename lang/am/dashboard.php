@@ -12,6 +12,10 @@ return [
     'edit' => 'խմբագրել',
     'delete' => 'հեռացնել',
     'submit' => 'Հաստատել',
+    'notSeted' => 'Չնշված',
+    'select' => 'Ընտրել',
+    'name' => 'Անուն',
+
 
     'questions' => [
         'question' => 'Հարց',
@@ -22,6 +26,15 @@ return [
         'statement' => 'Պնդում',
         'statements' => 'Պնդումներ',
         'answers' => 'Պատասխաններ',
+    ],
+
+    'categories' => [
+        'category' => 'Թեմա',
+        'categories' => 'Թեմաներ',
+        'categoriesTable' => 'Թեմաների աղյուսակ',
+        'addCategory' => 'Ավելացնել Թեմա',
+        'editCategory' => 'Խմբագրել Թեման',
+        'chooseCategory' => 'Նշեք թեման'
     ],
 
     'tests' => [
@@ -51,6 +64,5 @@ return [
         'next' => 'Հաջորդը',
         'done' => 'Հարցաշարը ավարտված է',
         'result' => 'Դուք ունեէ :count ճիշտ պատասխան։',
-
     ]
 ];

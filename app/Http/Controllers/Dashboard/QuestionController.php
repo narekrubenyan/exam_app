@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Models\Category;
 use App\Models\Question;
 use Illuminate\Http\Request;
 use App\Services\QuestionService;
@@ -20,7 +21,7 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        $questions = Question::paginate(30);
+        $questions = Question::with('category')->orderBy('id', 'desc')->paginate(30);
 
         $currentPage = Paginator::resolveCurrentPage();
         if ($currentPage > $questions->lastPage()) {
@@ -35,7 +36,9 @@ class QuestionController extends Controller
      */
     public function create()
     {
-        return view('dashboard.questions.create');
+        $categories = Category::select('id', 'name')->get();
+
+        return view('dashboard.questions.create', compact('categories'));
     }
 
     /**
@@ -56,8 +59,9 @@ class QuestionController extends Controller
     public function edit(string $id)
     {
         $question = Question::with('answers', 'statements')->find($id);
+        $categories = Category::select('id', 'name')->get();
 
-        return view('dashboard.questions.edit', compact('question'));
+        return view('dashboard.questions.edit', compact('question', 'categories'));
     }
 
     /**

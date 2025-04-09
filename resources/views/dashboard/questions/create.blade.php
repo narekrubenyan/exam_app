@@ -30,6 +30,16 @@
 
                             <div class="card-body">
                                 <div class="form-group">
+                                    <label>{{ __('dashboard.select') . ' ' .  __('dashboard.categories.category') }}</label>
+                                    <select name="category_id" class="form-control">
+                                        <option value="null" disabled selected>{{ __('dashboard.categories.chooseCategory') }}</option>
+                                        @foreach ($categories as $category)
+                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
                                     <label for="questionText">{{ __('dashboard.questions.question') }}</label>
                                     <input
                                         type="text"

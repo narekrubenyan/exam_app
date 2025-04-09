@@ -28,10 +28,32 @@
 
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">{{ __('dashboard.editQuestion') }}</h3>
+                                <h3 class="card-title">{{ __('dashboard.questions.editQuestion') }}</h3>
                             </div>
 
                             <div class="card-body">
+                                <div class="form-group">
+                                    <label>{{ __('dashboard.select') . ' ' .  __('dashboard.categories.category') }}</label>
+                                    <select name="category_id" class="form-control">
+
+                                        @if (!$question->category_id)
+                                            <option value="null" disabled selected>{{ __('dashboard.categories.chooseCategory') }}</option>
+                                        @endif
+
+                                        @foreach ($categories as $category)
+                                            <option
+                                                value="{{ $category->id }}"
+
+                                                @if ($question->category_id && $question->category_id == $category->id)
+                                                    selected
+                                                @endif
+                                            >
+                                                {{ $category->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
                                 <div class="form-group">
                                     <label for="questionText">{{ __('dashboard.questions.question') }}</label>
                                     <input

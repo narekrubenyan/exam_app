@@ -9,6 +9,13 @@
         </li>
 
         <li class="nav-item">
+            <a href="{{ route('categories.index') }}" class="nav-link">
+                <i class="nav-icon far fa-comment-dots"></i>
+                <p>{{ __('dashboard.categories.categories') }}</p>
+            </a>
+        </li>
+
+        <li class="nav-item">
             <a href="{{ route('tests.index') }}" class="nav-link">
                 <i class="nav-icon far fa-calendar-check"></i>
                 <p>{{ __('dashboard.tests.tests') }}</p>

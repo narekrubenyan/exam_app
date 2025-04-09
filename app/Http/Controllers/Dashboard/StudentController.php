@@ -70,6 +70,5 @@ class StudentController extends Controller
         Student::destroy($id);
 
         return redirect()->route('students.index')->with('success', __('messages.student.deleted'));
-
     }
 }

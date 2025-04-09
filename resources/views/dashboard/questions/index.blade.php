@@ -1,7 +1,6 @@
 @extends('layouts.admin')
 
 @section('content')
-
     <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
@@ -20,7 +19,6 @@
 
     <section class="content">
         <div class="container-fluid">
-
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
@@ -40,8 +38,8 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>{{ __('dashboard.id') }}</th>
                                         <th>{{ __('dashboard.questions.question') }}</th>
+                                        <th>{{ __('dashboard.categories.category') }}</th>
                                         <th>{{ __('dashboard.change') }}</th>
                                     </tr>
                                 </thead>
@@ -49,8 +47,14 @@
                                     @foreach ($questions as $question)
                                         <tr>
                                             <td>{{ $loop->iteration }}.</td>
-                                            <td>{{ $question->id }}</td>
                                             <td>{{ $question->title }}</td>
+                                            <td>
+                                                @if ( $question->category )
+                                                    <p>{{ $question->category->name }}</p>
+                                                @else
+                                                    <p class="text-warning"> {{ __('dashboard.notSeted') }} </p>
+                                                @endif
+                                            </td>
                                             <td>
                                                 <span><a href="{{ route('questions.edit', $question->id) }}" class="btn btn-warning">{{ __('dashboard.edit') }}</a></span>
                                                 <span>
