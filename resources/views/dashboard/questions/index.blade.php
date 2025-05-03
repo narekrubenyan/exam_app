@@ -47,12 +47,12 @@
                                     @foreach ($questions as $question)
                                         <tr>
                                             <td>{{ $loop->iteration }}.</td>
-                                            <td>{{ $question->title }}</td>
+                                            <td class="text-truncate d-inline-block" style="max-width: 400px;">{{ $question->title }}</td>
                                             <td>
                                                 @if ( $question->category )
                                                     <p>{{ $question->category->name }}</p>
                                                 @else
-                                                    <p class="text-warning"> {{ __('dashboard.notSeted') }} </p>
+                                                    <p class="text-black"> {{ __('dashboard.notSeted') }} </p>
                                                 @endif
                                             </td>
                                             <td>

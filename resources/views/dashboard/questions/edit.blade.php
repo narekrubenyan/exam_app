@@ -71,68 +71,43 @@
 
                                 <hr>
 
-                                <div class="card card-default {{ (count($question->statements)) ? '': 'collapsed-card'; }}">
+                                <div class="card card-default {{ (count($question->statements)) ? '': 'collapsed-card' }}">
                                     <div class="card-header">
                                         <h3 class="card-title">{{ __('dashboard.questions.statements') }}</h3>
 
                                         <div class="card-tools">
                                             <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                                <i class="fas {{ (count($question->statements)) ? 'fa-minus': 'fa-plus'; }}"></i>
+                                                <i class="fas {{ (count($question->statements)) ? 'fa-minus': 'fa-plus' }}"></i>
                                             </button>
                                         </div>
                                     </div>
 
-                                    <div class="card-body" style=" {{ (count($question->statements)) ? '': 'display: none;'; }}">
+                                    <div class="card-body" style=" {{ (count($question->statements)) ? '': 'display: none;' }}">
                                         <div class="row">
                                             <div class="col-12">
-                                                <div class="form-group">
-                                                    <input
-                                                        type="text" class="form-control mt-1" name="statements[]"
-                                                        placeholder="{{ __('dashboard.questions.statement') }} 1"
-                                                        @if(isset($question->statements[0]))
-                                                            value="{{ old('statements[0]') ?? $question->statements[0]->text }}"
-                                                        @else
-                                                            value="{{ old('statements[0]') ?? ''}}"
-                                                        @endif
-                                                    >
-                                                    <input
-                                                        type="text" class="form-control mt-1" name="statements[]"
-                                                        placeholder="{{ __('dashboard.questions.statement') }} 2"
-                                                        @if(isset($question->statements[1]))
-                                                            value="{{ old('statements[1]') ?? $question->statements[1]->text }}"
-                                                        @else
-                                                            value="{{ old('statements[1]') ?? ''}}"
-                                                        @endif
-                                                    >
-                                                    <input
-                                                        type="text" class="form-control mt-1" name="statements[]"
-                                                        placeholder="{{ __('dashboard.questions.statement') }} 3"
-                                                        @if(isset($question->statements[2]))
-                                                            value="{{ old('statements[2]') ?? $question->statements[2]->text }}"
-                                                        @else
-                                                            value="{{ old('statements[2]') ?? ''}}"
-                                                        @endif
-                                                    >
-                                                    <input
-                                                        type="text" class="form-control mt-1" name="statements[]"
-                                                        placeholder="{{ __('dashboard.questions.statement') }} 4"
-                                                        @if(isset($question->statements[3]))
-                                                            value="{{ old('statements[3]') ?? $question->statements[3]->text }}"
-                                                        @else
-                                                            value="{{ old('statements[3]') ?? ''}}"
-                                                        @endif
-                                                    >
-                                                    <input
-                                                        type="text" class="form-control mt-1" name="statements[]"
-                                                        placeholder="{{ __('dashboard.questions.statement') }} 5"
-                                                        @if(isset($question->statements[4]))
-                                                            value="{{ old('statements[4]') ?? $question->statements[4]->text }}"
-                                                        @else
-                                                            value="{{ old('statements[4]') ?? ''}}"
-                                                        @endif
-                                                    >
+                                                <div class="form-group" id="statementsBox">
+                                                    @foreach($question->statements as $statement)
+                                                        <input
+                                                            type="text" class="form-control mt-1" name="statements[]"
+                                                            placeholder="{{ __('dashboard.questions.statement') }} 1"
+                                                            @if(isset($statement))
+                                                                value="{{ old('statements[0]') ?? $statement->text }}"
+                                                            @else
+                                                                value="{{ old('statements[0]') ?? ''}}"
+                                                            @endif
+                                                        >
+                                                    @endforeach
                                                 </div>
+                                                <input type="button" class="btn btn-primary statement-action" value="+" data-action="add">
+                                                <input type="button" class="btn btn-warning statement-action" value="-" data-action="remove">
                                             </div>
+                                            <input
+                                                id="statement-example"
+                                                type="hidden"
+                                                class="form-control mt-1"
+                                                name="statements[]"
+                                                placeholder="{{ __('dashboard.questions.statement') }}"
+                                            >
                                         </div>
                                     </div>
                                 </div>
@@ -234,4 +209,8 @@
             </div>
         </div>
     </section>
+@endsection
+
+@section('scripts')
+    <script src="{{ asset('custom/js/question.js') }}"></script>
 @endsection

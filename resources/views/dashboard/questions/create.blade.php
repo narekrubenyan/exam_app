@@ -69,7 +69,7 @@
                                     <div class="card-body" style="display: none;">
                                         <div class="row">
                                             <div class="col-12">
-                                                <div class="form-group">
+                                                <div class="form-group" id="statementsBox">
                                                     <input type="text" class="form-control mt-1" name="statements[]"
                                                         placeholder="{{ __('dashboard.questions.statement') }} 1">
                                                     <input type="text" class="form-control mt-1" name="statements[]"
@@ -81,7 +81,16 @@
                                                     <input type="text" class="form-control mt-1" name="statements[]"
                                                         placeholder="{{ __('dashboard.questions.statement') }} 5">
                                                 </div>
+                                                <input type="button" class="btn btn-primary statement-action" value="+" data-action="add">
+                                                <input type="button" class="btn btn-warning statement-action" value="-" data-action="remove">
                                             </div>
+                                            <input
+                                                id="statement-example"
+                                                type="hidden"
+                                                class="form-control mt-1"
+                                                name="statements[]"
+                                                placeholder="{{ __('dashboard.questions.statement') }}"
+                                            >
                                         </div>
                                     </div>
                                 </div>
@@ -143,4 +152,8 @@
             </div>
         </div>
     </section>
+@endsection
+
+@section('scripts')
+    <script src="{{ asset('custom/js/question.js') }}"></script>
 @endsection
