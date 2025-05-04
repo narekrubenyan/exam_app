@@ -27,7 +27,7 @@ class AnswerFactory extends Factory
     {
         return [
             'text' => $this->faker->sentence(),
-            'is_right' => $this->faker->boolean(),
+            'is_correct' => false,
             'question_id' => Question::factory(),
         ];
     }

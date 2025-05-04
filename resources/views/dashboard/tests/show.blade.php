@@ -66,7 +66,7 @@
                                                 <div>
                                                     <ol>
                                                         @foreach ($question->answers as $answer)
-                                                            <li @if ($answer->is_right) @class(['text-success']) @endif>
+                                                            <li @if ($answer->is_correct) @class(['text-success']) @endif>
                                                                 {{ $answer->text }}
                                                             </li>
                                                         @endforeach

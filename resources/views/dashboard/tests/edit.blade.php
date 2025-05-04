@@ -125,7 +125,7 @@
                                             <span class="input-group-text">
                                                 <input
                                                     type="checkbox" name="answers[0][isTrue]"
-                                                    @if($question->answers[0]->is_right)
+                                                    @if($question->answers[0]->is_correct)
                                                         checked
                                                     @endif
                                                 >
@@ -141,7 +141,7 @@
                                             <span class="input-group-text">
                                                 <input
                                                     type="checkbox" name="answers[1][isTrue]"
-                                                    @if($question->answers[1]->is_right)
+                                                    @if($question->answers[1]->is_correct)
                                                         checked
                                                     @endif
                                                 >
@@ -157,7 +157,7 @@
                                             <span class="input-group-text">
                                                 <input
                                                     type="checkbox" name="answers[2][isTrue]"
-                                                    @if($question->answers[2]->is_right)
+                                                    @if($question->answers[2]->is_correct)
                                                         checked
                                                     @endif
                                                 >
@@ -173,7 +173,7 @@
                                             <span class="input-group-text">
                                                 <input
                                                     type="checkbox" name="answers[3][isTrue]"
-                                                    @if($question->answers[3]->is_right)
+                                                    @if($question->answers[3]->is_correct)
                                                         checked
                                                     @endif
                                                 >
@@ -189,7 +189,7 @@
                                             <span class="input-group-text">
                                                 <input
                                                     type="checkbox" name="answers[4][isTrue]"
-                                                    @if($question->answers[4]->is_right)
+                                                    @if($question->answers[4]->is_correct)
                                                         checked
                                                     @endif
                                                 >

@@ -25,7 +25,7 @@ class QuestionRepository
                 $answer->text = $answerData['text'];
 
                 if (isset($answerData['isTrue']) && $answerData['isTrue'] == 'on') {
-                    $answer->is_right = 1;
+                    $answer->is_correct = 1;
                 }
 
                 $answer->question_id = $question->id;
@@ -68,7 +68,7 @@ class QuestionRepository
                 $answer->text = $answerData['text'];
 
                 if (isset($answerData['isTrue']) && $answerData['isTrue'] == 'on') {
-                    $answer->is_right = 1;
+                    $answer->is_correct = 1;
                 }
 
                 $answer->question_id = $question->id;
@@ -88,7 +88,7 @@ class QuestionRepository
             DB::commit();
 
             return $question;
-        } catch (\Exeption $th) {
+        } catch (\Exeption $e) {
             DB::rollback();
             report($e);
 
@@ -108,7 +108,7 @@ class QuestionRepository
             DB::commit();
 
             return true;
-        } catch (\Exeption $th) {
+        } catch (\Exeption $e) {
             DB::rollback();
             report($e);
 
