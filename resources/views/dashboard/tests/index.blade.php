@@ -19,9 +19,25 @@
     </div>
 
     <section class="content">
-        <div class="container-fluid">
-
+        <div class="container-fluid"> 
             <div class="col-12">
+                
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
+                @if (session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
+
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">{{ __('dashboard.tests.testsTable') }}</h3>
@@ -60,6 +76,10 @@
                             </table>
                         </div>
                     @endif
+
+                    <div class="card-footer">
+                        {{ $tests->withQueryString()->links() }}
+                    </div>
                 </div>
             </div>
 

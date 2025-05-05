@@ -44,11 +44,14 @@ class QuestionRepository
             DB::commit();
 
             return $question;
-        } catch (\Exeption $e) {
-            DB::rollback();
+        } catch (\Exception $e) {
+            DB::rollBack();
             report($e);
-
-            return Redirect::back()->with('msg', $e->getMessage);
+        
+            return redirect()
+                ->back()
+                ->withErrors(['error' => $e->getMessage()])
+                ->withInput();
         }
     }
 
@@ -88,11 +91,14 @@ class QuestionRepository
             DB::commit();
 
             return $question;
-        } catch (\Exeption $e) {
-            DB::rollback();
+        } catch (\Exception $e) {
+            DB::rollBack();
             report($e);
-
-            return Redirect::back()->with('msg', $e->getMessage);
+        
+            return redirect()
+                ->back()
+                ->withErrors(['error' => $e->getMessage()])
+                ->withInput();
         }
     }
 
@@ -108,11 +114,14 @@ class QuestionRepository
             DB::commit();
 
             return true;
-        } catch (\Exeption $e) {
-            DB::rollback();
+        } catch (\Exception $e) {
+            DB::rollBack();
             report($e);
-
-            return Redirect::back()->with('msg', $e->getMessage);
+        
+            return redirect()
+                ->back()
+                ->withErrors(['error' => $e->getMessage()])
+                ->withInput();
         }
 
     }

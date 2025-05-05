@@ -54,7 +54,7 @@
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
-                        {{ auth()->user()->name }} <span class="caret"></span>
+                        {{ auth()->user()->username }} <span class="caret"></span>
                     </a>
                     <div class="dropdown-menu" style="">
                         <a class="dropdown-item" href="{{ route('logout') }}"

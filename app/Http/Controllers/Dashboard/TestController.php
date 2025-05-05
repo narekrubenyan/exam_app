@@ -6,6 +6,7 @@ use App\Models\Test;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Services\TestService;
+use App\Http\Requests\TestRequest;
 use App\Http\Controllers\Controller;
 
 class TestController extends Controller
@@ -16,7 +17,7 @@ class TestController extends Controller
 
     public function index()
     {
-        $tests = Test::all();
+        $tests = Test::orderBy('id', 'desc')->paginate(30);
 
         return view('dashboard.tests.index', compact('tests'));
     }
@@ -35,9 +36,9 @@ class TestController extends Controller
         return view('dashboard.tests.create', compact('categories'));
     }
 
-    public function store(Request $request)
+    public function store(TestRequest $request)
     {
-        $data = $request->all();
+        $data = $request->validated();
 
         $this->testService->createOrUpdate($data['category_id']);
 
