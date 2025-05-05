@@ -19,113 +19,24 @@
 
     <section class="content">
         <div class="container-fluid">
-
-            @if($errors->any())
-                <h4 class="text-danger">{{$errors->first()}}</h4>
-            @endif
-
             <div class="row">
                 <div class="col-12">
-                    <form  method="POST" action="{{ route('questions.store') }}" enctype="multipart/form-data">
+                    <form  method="POST" action="{{ route('tests.store') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title">{{ __('dashboard.questions.addQuestion') }}</h3>
                             </div>
-
+                            
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="questionText">{{ __('dashboard.questions.question') }}</label>
-                                    <input
-                                        type="text"
-                                        class="form-control"
-                                        id="questionText"
-                                        name="title"
-                                        value="{{ old('title') }}"
-                                        placeholder="{{ __('dashboard.questions.question') }}"
-                                    >
-                                    @error('title')
-                                        <div class="text-danger">{{ $message }}</div>
-                                    @enderror
-                                </div>
-
-                                <hr>
-
-                                <div class="card card-default collapsed-card">
-                                    <div class="card-header">
-                                        <h3 class="card-title">{{ __('dashboard.questions.statements') }}</h3>
-
-                                        <div class="card-tools">
-                                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                                <i class="fas fa-plus"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="card-body" style="display: none;">
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control mt-1" name="statements[]"
-                                                        placeholder="{{ __('dashboard.questions.statement') }} 1">
-                                                    <input type="text" class="form-control mt-1" name="statements[]"
-                                                        placeholder="{{ __('dashboard.questions.statement') }} 2">
-                                                    <input type="text" class="form-control mt-1" name="statements[]"
-                                                        placeholder="{{ __('dashboard.questions.statement') }} 3">
-                                                    <input type="text" class="form-control mt-1" name="statements[]"
-                                                        placeholder="{{ __('dashboard.questions.statement') }} 4">
-                                                    <input type="text" class="form-control mt-1" name="statements[]"
-                                                        placeholder="{{ __('dashboard.questions.statement') }} 5">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <hr>
-
-                                <div class="col-lg-6">
-                                    <h3 class="card-title mb-2">{{ __('dashboard.questions.answers') }}</h3>
-
-                                    <div class="input-group mb-1">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">
-                                                <input type="checkbox" name="answers[0][isTrue]">
-                                            </span>
-                                        </div>
-                                        <input type="text" class="form-control" name="answers[0][text]">
-                                    </div>
-                                    <div class="input-group mb-1">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">
-                                                <input type="checkbox" name="answers[1][isTrue]">
-                                            </span>
-                                        </div>
-                                        <input type="text" class="form-control" name="answers[1][text]">
-                                    </div>
-                                    <div class="input-group mb-1">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">
-                                                <input type="checkbox" name="answers[2][isTrue]">
-                                            </span>
-                                        </div>
-                                        <input type="text" class="form-control" name="answers[2][text]">
-                                    </div>
-                                    <div class="input-group mb-1">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">
-                                                <input type="checkbox" name="answers[3][isTrue]">
-                                            </span>
-                                        </div>
-                                        <input type="text" class="form-control" name="answers[3][text]">
-                                    </div>
-                                    <div class="input-group mb-1">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">
-                                                <input type="checkbox" name="answers[4][isTrue]">
-                                            </span>
-                                        </div>
-                                        <input type="text" class="form-control" name="answers[4][text]">
-                                    </div>
+                                    <label>{{ __('dashboard.select') . ' ' .  __('dashboard.categories.category') }}</label>
+                                    <select name="category_id" class="form-control">
+                                        <option value="null" disabled selected>{{ __('dashboard.categories.chooseCategory') }}</option>
+                                        @foreach ($categories as $category)
+                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
 

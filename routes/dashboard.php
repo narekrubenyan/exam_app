@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Test;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\TestController;
@@ -24,9 +25,6 @@ Route::prefix('dashboard')
     Route::resource('categories', CategoryController::class);
     Route::resource('tests', TestController::class);
     Route::resource('students', StudentController::class);
-
-    Route::post('tests/generate', [TestController::class, 'generate'])->name('tests.generate');
-
 });
 
 Route::get('/test', function () {

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Models\Test;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Services\TestService;
 use App\Http\Controllers\Controller;
@@ -27,11 +28,19 @@ class TestController extends Controller
         return view('dashboard.tests.show', compact('test'));
     }
 
-    public function generate()
+    public function create()
     {
-        $this->testService->generate();
+        $categories = Category::all();
+
+        return view('dashboard.tests.create', compact('categories'));
+    }
+
+    public function store(Request $request)
+    {
+        $data = $request->all();
+
+        $this->testService->createOrUpdate($data['category_id']);
 
         return redirect()->route('tests.index');
     }
-
 }

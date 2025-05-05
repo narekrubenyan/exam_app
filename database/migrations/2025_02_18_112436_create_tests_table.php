@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('tests', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
+            $table->unsignedBigInteger('category_id')->constrained()->onDelete('cascade');
+            $table->unsignedBigInteger('option_id')->constrained()->onDelete('cascade');
         });
     }
 

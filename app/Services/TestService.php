@@ -3,29 +3,61 @@
 namespace App\Services;
 
 use App\Models\Test;
+use App\Models\Option;
+use App\Models\Category;
 use App\Models\Question;
 use App\Models\TestQuestions;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class TestService.
  */
 class TestService
 {
-    public function generate()
+    public function createOrUpdate($categoryId)
     {
-        TestQuestions::truncate();
+        DB::beginTransaction();
+        try {
+            $category = Category::findOrFail($categoryId);
+            $options = Option::all();
+            
+            $options->each(function ($option) use ($category) {
+                $questions = Question::where('category_id', $category->id)
+                    ->inRandomOrder()
+                    ->take(20)
+                    ->get();
+    
+                if ($questions->count() < 20) {
+                    return redirect()->route('tests.create', [
+                        'error' => 'Not enough questions in this category'
+                    ]);
+                }
 
-        $testIds = Test::pluck('id');
+                $test = Test::where('category_id', $category->id)
+                    ->where('option_id', $option->id)
+                    ->first();
+    
+                if ($test) {
+                    $test->questions()->sync($questions->pluck('id'));
+                } else {
+                    $test = Test::create([
+                        'category_id' => $category->id,
+                        'option_id' => $option->id
+                    ]);
 
-        foreach ($testIds as $tId) {
-            $randomQuestionIds = Question::inRandomOrder()->pluck('id')->take(20);
+                    $test->questions()->attach($questions->pluck('id'));
+                }
+            });
+            DB::commit();
 
-            foreach ($randomQuestionIds as $qId) {
-                TestQuestions::create([
-                    'test_id' => $tId,
-                    'question_id' => $qId
-                ]);
-            }
+            return true;
+        } catch (\Exeption $e) {
+            DB::rollback();
+            report($e);
+
+            return redirect()->route('tests.create', [
+                'error' => $e->getMessage
+            ]);
         }
     }
 }

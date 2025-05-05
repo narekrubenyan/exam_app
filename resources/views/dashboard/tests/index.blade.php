@@ -27,10 +27,7 @@
                         <h3 class="card-title">{{ __('dashboard.tests.testsTable') }}</h3>
                         <div class="card-tools">
                             <div>
-                                <form action="{{ route('tests.generate') }}" method="POST" class="d-inline-block">
-                                    @csrf
-                                    <input type="submit" value="{{ __('dashboard.tests.generate') }}" class="btn btn-success">
-                                </form>
+                                <a href="{{ route('tests.create') }}" class="btn btn-success">{{ __('dashboard.tests.generate') }}</a>
                             </div>
                         </div>
                     </div>
@@ -43,7 +40,8 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>{{ __('dashboard.tests.test') }}</th>
+                                        <th>{{ __('dashboard.categories.category') }}</th>
+                                        <th>{{ __('dashboard.test.option') }}</th>
                                         <th>{{ __('dashboard.change') }}</th>
                                     </tr>
                                 </thead>
@@ -51,7 +49,8 @@
                                     @foreach ($tests as $test)
                                         <tr>
                                             <td>{{ $loop->iteration }}.</td>
-                                            <td>{{ $test->title }}</td>
+                                            <td class="text-truncate d-inline-block" style="max-width: 400px;">{{ $test->category->name }}</td>
+                                            <td>{{ $test->option->name }}</td>
                                             <td>
                                                 <a href="{{ route('tests.show', $test->id) }}" class="btn btn-info">{{ __('dashboard.view') }}</a>
                                             </td>

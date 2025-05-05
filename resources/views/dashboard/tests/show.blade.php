@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">{{ __('dashboard.questions.questions') }}</h1>
+                    <h1 class="m-0">{{ __('dashboard.questions.questions') }} | {{ $test->category->name }}</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -22,28 +22,17 @@
             <section class="content">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">{{ $test->title }}</h3>
+                        <h4 class="card-title">{{ $test->option->name }}</h4>
                     </div>
                     <div class="card-body p-0">
                         <table class="table table-striped projects">
-                            <thead>
-                                <tr>
-                                    <th style="width: 1%">
-                                        #
-                                    </th>
-                                    <th></th>
-                                </tr>
-                            </thead>
                             <tbody>
                                 @foreach ($test->questions as $question)
                                     <tr>
                                         <td>
-                                            {{ $loop->iteration }}
-                                        </td>
-                                        <td>
                                             <div class="post">
                                                 <div>
-                                                    <h5>{{ __('dashboard.questions.question') }}</h5>
+                                                    <h5>{{ __('dashboard.questions.question') }} - {{ $loop->iteration }}</h5>
                                                     <p>
                                                         {{ $question->title }}
                                                     </p>
@@ -54,9 +43,7 @@
                                                     <div>
                                                         <ol>
                                                             @foreach ($question->statements as $statement)
-
                                                                 <li>{{ $statement->text }}</li>
-
                                                             @endforeach
                                                         </ol>
                                                     </div>
