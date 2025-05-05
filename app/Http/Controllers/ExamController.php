@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Question;
+use App\Models\Answer;
 use App\Models\Student;
+use App\Models\Question;
 use Illuminate\Http\Request;
 
 class ExamController extends Controller
@@ -16,17 +17,15 @@ class ExamController extends Controller
             return redirect()->route('student.login')->withErrors(['error' => 'Please log in first']);
         }
 
-        // Ensure exam questions are stored in session
         if (!session()->has('exam_questions')) {
             $questions = $student->test->questions()->pluck('id')->toArray();
             session([
                 'exam_questions' => $questions,
                 'current_index' => 0,
-                'correct_answers' => 0
+                'correct_answers' => []
             ]);
         }
 
-        // Redirect to first question
         return redirect()->route('exam.question', ['index' => 0]);
     }
 
@@ -36,28 +35,30 @@ class ExamController extends Controller
         $questionId = $request->question_id;
         $selectedAnswer = $request->answer;
 
-        // Get the question and correct answer(s)
-        $question = Question::find($questionId);
-        $correctAnswers = explode(',', $question->correct_answers); // If stored as "1,2,3"
+        $question = Question::with('answers')->find($questionId);
 
-        // Check if answer is correct
-        $isCorrect = in_array($selectedAnswer, $correctAnswers);
+        if (!in_array($selectedAnswer, $question->answers->pluck('id')->toArray())) {
+            return redirect()
+                ->back()
+                ->withErrors(['name' => __('messages.tests.questionCountMinError', [
+                    'category' => $category->name
+                ])])
+                ->withInput();
+        }
 
-        // Store answer in session (prevent changes)
+        $isCorrect = Answer::find($selectedAnswer)->is_correct;
         $answeredQuestions = session('answered_questions', []);
+
+        if ($isCorrect && !isset($answeredQuestions[$questionId])) {
+            session()->push('correct_answers', $questionId);
+        }
+
         $answeredQuestions[$questionId] = [
             'selected' => $selectedAnswer,
             'correct' => $isCorrect,
         ];
         session(['answered_questions' => $answeredQuestions]);
 
-        // Update total correct count
-        $correctCount = session('correct_answers', 0);
-        if ($isCorrect && !isset($answeredQuestions[$questionId])) {
-            session(['correct_answers' => $correctCount + 1]);
-        }
-
-        // Move to next question
         return redirect()->route('exam.question', ['index' => $request->current_index + 1]);
     }
 
@@ -65,12 +66,16 @@ class ExamController extends Controller
     {
         $questions = session('exam_questions', []);
         if (!isset($questions[$index])) {
-            return redirect()->route('exam.results'); // Redirect if out of range
+            return redirect()->route('exam.results');
         }
 
         $question = Question::find($questions[$index]);
 
         return view('exam.question', [
+            'test' => [
+                'category' => session('test')['category']['name'],
+                'option' => session('test')['option']['name'],
+            ],
             'question' => $question,
             'index' => $index,
             'total' => count($questions),
@@ -80,7 +85,7 @@ class ExamController extends Controller
 
     public function result()
     {
-        $totalCorrect = session('correct_answers', 0);
+        $totalCorrect = count(session('correct_answers', []));
         return view('exam.result', compact('totalCorrect'));
     }
 }

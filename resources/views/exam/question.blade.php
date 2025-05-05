@@ -2,6 +2,10 @@
 
 @section('content')
 <div class="container">
+
+    <h3 class="h3">{{ $test['category'] }}</h3>
+    <h5 class="h5">{{ $test['option'] }}</h5>
+
     <div class="card">
         <div class="card-body">
             <h4 class="card-title">Question {{ $index + 1 }} of {{ $total }}</h4>
@@ -50,7 +54,7 @@
 
             @if(isset($submittedAnswer))
                 <div class="alert mt-3 {{ $wasCorrect ? 'alert-success' : 'alert-danger' }}">
-                    {{ $wasCorrect ? '✅ Correct!' : '❌ Incorrect!' }}
+                    {{ $wasCorrect ? '✅ ' . __('exam.correct') . '!' : '❌ ' . __('exam.incorrect') . '!' }}
                 </div>
             @endif
 
@@ -66,7 +70,7 @@
             </div>
 
             <div class="mt-3">
-                <strong>{{ __('exam.totalCorrectAnswers') }}</strong> {{ session('correct_answers', 0) }}
+                <strong>{{ __('exam.totalCorrectAnswers') }}</strong> {{ count(session('correct_answers', [])) }}
             </div>
         </div>
     </div>

@@ -15,10 +15,10 @@ use App\Http\Controllers\StudentAuthController;
 |
 */
 
-Auth::routes(options: [
-    'register' => false, // Registration Routes...
-    'reset' => false, // Password Reset Routes...
-    'verify' => false, // Email Verification Routes...
+Auth::routes([
+    'register' => false,
+    'reset' => false,
+    'verify' => false,
 ]);
 
 Route::get('/', [StudentAuthController::class, 'showLoginForm']);

@@ -190,7 +190,8 @@ return [
         'username' => __('fields.username'),
         'password' => __('fields.password'),
         'name' => __('fields.name'),
-        'category_id' => __('fields.category')
+        'category_id' => __('fields.category'),
+        'login_code' => __('fields.login_code')
     ],
 
 ];

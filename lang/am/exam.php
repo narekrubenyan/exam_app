@@ -2,5 +2,7 @@
 
 return [
     'totalCorrectAnswers' => 'ճիշտ պատասխանների քնանկ',
-    'finish' => 'Ավարտել թեստը'
+    'finish' => 'Ավարտել թեստը',
+    'correct' => 'Ճիշտ',
+    'incorrect' => 'Սխալ'
 ];

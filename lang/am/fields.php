@@ -4,5 +4,6 @@ return [
     'username' => 'Մուտքանուն',
     'password' => 'Գաղտնաբառ',
     'name' => 'Անուն',
-    'category' => 'Թեմա'
+    'category' => 'Թեմա',
+    'login_code' => 'Մուտքի կոդ'
 ];
