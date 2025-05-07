@@ -29,5 +29,12 @@
             </a>
         </li>
 
+        <li class="nav-item">
+            <a href="{{ route('results.index') }}" class="nav-link">
+                <i class="nav-icon far fa-user"></i>
+                <p>{{ __('dashboard.testResults.results') }}</p>
+            </a>
+        </li>
+
     </ul>
 </nav>

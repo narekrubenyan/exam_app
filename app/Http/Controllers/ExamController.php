@@ -38,45 +38,31 @@ class ExamController extends Controller
 
     public function submitAnswer(Request $request)
     {
-        $student = Student::find(session('student_id'));
-        $questionId = $request->question_id;
-        $selectedAnswer = $request->answer;
-
-        $question = Question::with('answers')->find($questionId);
-
-        if (!in_array($selectedAnswer, $question->answers->pluck('id')->toArray())) {
-            return redirect()
-                ->back()
-                ->withErrors(['name' => __('messages.tests.questionCountMinError', [
-                    'category' => $category->name
-                ])])
-                ->withInput();
-        }
-
-        $isCorrect = Answer::find($selectedAnswer)->is_correct;
-        $answeredQuestions = session('answered_questions', []);
-
-        if ($isCorrect && !isset($answeredQuestions[$questionId])) {
-            session()->push('correct_answers', $questionId);
-        }
-
-        $answeredQuestions[$questionId] = [
-            'selected' => $selectedAnswer,
-            'correct' => $isCorrect,
-        ];
-        session(['answered_questions' => $answeredQuestions]);
+        $this->examService->submitAnswer($request);
 
         return redirect()->route('exam.question', ['index' => $request->current_index + 1]);
     }
 
     public function showQuestion($index)
     {
+        $this->studentService->deactivate(session('student_id'));
+    
         $questions = session('exam_questions', []);
         if (!isset($questions[$index])) {
             return redirect()->route('exam.results');
         }
 
         $question = Question::find($questions[$index]);
+
+        $submittedAnswer = session('answered_questions', [])[$question->id]['selected'] ?? null;
+
+        $correctAnswer = null;
+        if ($submittedAnswer) {
+            $correctAnswer = Answer::where([
+                'question_id' => $question->id,
+                'is_correct' => 1
+            ])->pluck('id')->first();
+        }
 
         return view('exam.question', [
             'test' => [
@@ -87,12 +73,13 @@ class ExamController extends Controller
             'index' => $index,
             'total' => count($questions),
             'answered' => session('answered_questions', []),
+            'correctId' => $correctAnswer
         ]);
     }
 
     public function result()
     {
-        $this->studentService->updateLoginCode(session('student_id'));
+        $this->studentService->deactivate(session('student_id'));
 
         $this->examService->storeExam([
             'student_id' => session('student_id'),

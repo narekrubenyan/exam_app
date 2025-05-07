@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('test_results', function (Blueprint $table) {
             $table->id();
             $table->foreignId('student_id')->constrained()->onDelete('cascade');
+            $table->string('category');
+            $table->string('option');
             $table->integer('score')->default(0);
             $table->timestamps();
         });

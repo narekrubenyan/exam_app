@@ -9,7 +9,7 @@ use App\Models\Student;
  */
 class StudentService
 {
-    public function updateLoginCode($studentId, $length = 10): void
+    public function deactivate($studentId, $length = 10): void
     {
         try {
             $student = Student::findOrFail($studentId);
@@ -17,10 +17,11 @@ class StudentService
             do {
                 $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_+-=';
                 $code = substr(str_shuffle(str_repeat($characters, $length)), 0, $length);
-            } while (Student::where('student_code', $code)->exists());
+            } while (Student::where('login_code', $code)->exists());
     
             $student->update([
-                'student_code' => $code,
+                'login_code' => $code,
+                'test_id' => null
             ]);
         } catch (\Exception $e) {
             report($e);

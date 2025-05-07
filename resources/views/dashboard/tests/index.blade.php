@@ -57,7 +57,7 @@
                                     <tr>
                                         <th>#</th>
                                         <th>{{ __('dashboard.categories.category') }}</th>
-                                        <th>{{ __('dashboard.test.option') }}</th>
+                                        <th>{{ __('dashboard.tests.option') }}</th>
                                         <th>{{ __('dashboard.change') }}</th>
                                     </tr>
                                 </thead>

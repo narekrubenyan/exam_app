@@ -36,9 +36,17 @@ class StudentAuthController extends Controller
             return back()->withErrors(['error' => __('messages.student.not_found')]);
         }
 
-        if (!$student->test_id) {
-            $student->test_id = $this->assignTest($request['category_id']);
-            $student->save();
+        $testId = $this->assignTest($request['category_id']);
+
+        if ($testId) {
+            $student->update([
+                'test_id' => $testId
+            ]);
+        } else {
+            return redirect()
+                ->back()
+                ->withErrors(['error' => __('exam.testNotExist')])
+                ->withInput();
         }
 
         session(['student_id' => $student->id, 'test_id' => $student->test_id]);
@@ -59,6 +67,10 @@ class StudentAuthController extends Controller
     private function assignTest($categoryId)
     {
         $testIds = Test::where('category_id', $categoryId)->pluck('id')->toArray();
+
+        if (empty($testIds)) {
+            return false;
+        }
 
         $testCounts = Student::select('test_id')
             ->whereNotNull('test_id')

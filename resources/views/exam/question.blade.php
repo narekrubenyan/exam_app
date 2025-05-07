@@ -43,7 +43,12 @@
                             {{ isset($submittedAnswer) ? 'disabled' : '' }}
                             required
                         >
-                        <label class="form-check-label" for="{{ $inputId }}">{{ $answer->text }}</label>
+                        <label
+                            class="form-check-label 
+                            @if ($correctId && $answer->id == $correctId) text-success 
+                            @elseif ($submittedAnswer == $answer->id) text-danger @endif" 
+                            for="{{ $inputId }}"
+                        >{{ $answer->text }}</label>
                     </div>
                 @endforeach
 

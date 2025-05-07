@@ -33,12 +33,12 @@
 
                 <div class="form-group">
                     <label for="name">{{ __('dashboard.students.name') }}:</label>
-                    <input type="text" class="form-control" id="name" name="name" required>
+                    <input type="text" class="form-control" id="name" name="name" value="{{ old('name') ?? '' }}" required>
                 </div>
 
                 <div class="form-group">
                     <label for="surname">{{ __('dashboard.students.surname') }}:</label>
-                    <input type="text" class="form-control" id="surname" name="surname" required>
+                    <input type="text" class="form-control" id="surname" name="surname" value="{{ old('surname') ?? '' }}" required>
                 </div>
 
                 <div class="form-group">

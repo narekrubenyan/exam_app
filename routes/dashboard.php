@@ -8,6 +8,7 @@ use App\Http\Controllers\Dashboard\StudentController;
 use App\Http\Controllers\Dashboard\CategoryController;
 use App\Http\Controllers\Dashboard\QuestionController;
 use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Dashboard\TestResultController;
 
 
 // Route::get(uri: '/', action: function (): RedirectResponse {
@@ -25,6 +26,9 @@ Route::prefix('dashboard')
     Route::resource('categories', CategoryController::class);
     Route::resource('tests', TestController::class);
     Route::resource('students', StudentController::class);
+
+    Route::get('testResults', [TestResultController::class, 'index'])->name('results.index');
+    Route::get('testResults/{result}', [TestResultController::class, 'show'])->name('dashboard.results.show');
 });
 
 Route::get('/test', function () {
