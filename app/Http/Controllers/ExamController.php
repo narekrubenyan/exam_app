@@ -6,9 +6,16 @@ use App\Models\Answer;
 use App\Models\Student;
 use App\Models\Question;
 use Illuminate\Http\Request;
+use App\Services\ExamService;
+use App\Services\StudentService;
 
 class ExamController extends Controller
 {
+    public function __construct(
+        private ?ExamService $examService = null,
+        private ?StudentService $studentService = null
+    ) {}
+
     public function start()
     {
         $student = Student::find(session('student_id'));
@@ -85,6 +92,17 @@ class ExamController extends Controller
 
     public function result()
     {
+        $this->studentService->updateLoginCode(session('student_id'));
+
+        $this->examService->storeExam([
+            'student_id' => session('student_id'),
+            'category' => session('test')['category']['name'],
+            'option' => session('test')['option']['name'],
+            'questions' => session('exam_questions'),
+            'correct_answers' => session('correct_answers'),
+            'answered_questions' => session('answered_questions'),
+        ]);
+
         $totalCorrect = count(session('correct_answers', []));
         return view('exam.result', compact('totalCorrect'));
     }

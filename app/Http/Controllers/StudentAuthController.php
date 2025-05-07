@@ -83,6 +83,6 @@ class StudentAuthController extends Controller
     public function logout()
     {
         Session::flush();
-        return redirect('/student/login');
+        return redirect('/');
     }
 }

@@ -8,8 +8,8 @@
 
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title">Question {{ $index + 1 }} of {{ $total }}</h4>
-            <p>{{ $question->text }}</p>
+            <h4 class="card-title">{{ __('dashboard.questions.question') }} {{ $index + 1 }} ( {{ $total }} )</h4>
+            <p>{{ $question->title }}</p>
 
             @if($question->statements)
                 <ul>

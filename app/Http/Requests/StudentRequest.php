@@ -24,7 +24,7 @@ class StudentRequest extends FormRequest
         return [
             'name' => 'required|string|max:255',
             'surname' => 'required|string|max:255',
-            'login_code' => '',
+            'login_code' => 'required|unique:students,login_code',
         ];
     }
 }
