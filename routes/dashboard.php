@@ -11,15 +11,9 @@ use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\TestResultController;
 
 
-// Route::get(uri: '/', action: function (): RedirectResponse {
-//     return redirect()->route(route: 'dashboard');
-// });
-
-
 Route::prefix('dashboard')
 ->middleware( 'auth')
 ->group(function() {
-
     Route::get(uri: '/', action: [DashboardController::class, 'index'])->name(name: 'dashboard');
 
     Route::resource('questions', QuestionController::class);
