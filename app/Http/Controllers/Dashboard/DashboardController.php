@@ -2,13 +2,24 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use App\Http\Controllers\Controller;
+use App\Models\Student;
+use App\Models\Category;
+use App\Models\Question;
 use Illuminate\Contracts\View\View;
+use App\Http\Controllers\Controller;
 
 class DashboardController extends Controller
 {
     public function index(): View
     {
-        return view(view: 'dashboard.index');
+        $questionsCount = Question::query()->count();
+        $categoriesCount = Category::query()->count();
+        $studentsQount = Student::query()->count();
+
+        return view('dashboard.index', compact(
+            'questionsCount',
+            'categoriesCount',
+            'studentsQount',
+        ));
     }
 }

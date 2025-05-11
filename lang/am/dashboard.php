@@ -15,7 +15,7 @@ return [
     'notSeted' => 'Չնշված',
     'select' => 'Ընտրել',
     'name' => 'Անուն',
-
+    'more' => 'Ավելին',
 
     'questions' => [
         'question' => 'Հարց',
@@ -69,7 +69,6 @@ return [
 
     'testResults' => [
         'results' => 'Արդյունքներ',
-        'result' => 'Արդյունք',
-        
+        'result' => 'Արդյունք'
     ]
 ];
