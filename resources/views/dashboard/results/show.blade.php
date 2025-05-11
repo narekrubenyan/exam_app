@@ -6,7 +6,7 @@
             <div class="row mb-2">
                 <div class="col-sm-6">
                     <h1 class="m-0">
-                        {{ $result->student->name }} | {{ $result->category }} | {{ $result->option }}
+                        {{ $result->student->name }} | {{ $result->category }} | {{ $result->option }} | {{ __('dashboard.testResults.result') }} - {{ $result->score }}/20
                     </h1>
                 </div>
                 <div class="col-sm-6">

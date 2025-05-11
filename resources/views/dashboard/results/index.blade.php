@@ -35,23 +35,25 @@
                         <div class="card-body"><h1><b>0</b> {{ __('dashboard.testResults.result') }}</h1></div>
                     @else
                         <div class="card-body p-0">
-                            <table class="table">
+                            <table class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th>Student</th>
-                                        <th>Score</th>
-                                        <th>Date</th>
-                                        <th>Action</th>
+                                        <th>{{ __('dashboard.students.student') }}</th>
+                                        <th>{{ __('dashboard.categories.category') }}</th>
+                                        <th>{{ __('dashboard.testResults.result') }}</th>
+                                        <th>{{ __('dashboard.date') }}</th>
+                                        <th>{{ __('dashboard.change') }}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach($results as $result)
                                     <tr>
                                         <td>{{ $result->student->name }}</td>
+                                        <td class="text-truncate d-inline-block" style="max-width: 100px;">{{ $result->category }}</td>
                                         <td>{{ $result->score }}/20</td>
                                         <td>{{ $result->created_at->format('d.m.Y H:i') }}</td>
                                         <td>
-                                            <a href="{{ route('dashboard.results.show', $result->id) }}">View</a>
+                                            <a href="{{ route('dashboard.results.show', $result->id) }}" class="btn btn-info">{{ __('dashboard.view') }}</a>
                                         </td>
                                     </tr>
                                     @endforeach
