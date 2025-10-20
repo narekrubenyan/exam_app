@@ -6,6 +6,7 @@ return [
     'logout' => 'Դուրս գալ',
     'id' => 'ID համարը',
     'welcome' => 'Բարի գալուստ',
+    'date' => 'Ամսաթիվը',
 
     'view' => 'դիտել',
     'change' => 'փոփոխություն',
@@ -15,7 +16,7 @@ return [
     'notSeted' => 'Չնշված',
     'select' => 'Ընտրել',
     'name' => 'Անուն',
-
+    'more' => 'Ավելին',
 
     'questions' => [
         'question' => 'Հարց',
@@ -69,7 +70,6 @@ return [
 
     'testResults' => [
         'results' => 'Արդյունքներ',
-        'result' => 'Արդյունք',
-        
+        'result' => 'Արդյունք'
     ]
 ];
