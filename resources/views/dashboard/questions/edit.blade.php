@@ -116,87 +116,26 @@
 
                                 <div class="col-lg-6">
                                     <h3 class="card-title mb-2">{{ __('dashboard.questions.answers') }}</h3>
+                                    @foreach ($question->answers as $answer)
 
-                                    <div class="input-group mb-1">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">
-                                                <input
-                                                    type="checkbox" name="answers[0][isTrue]"
-                                                    @if($question->answers[0]->is_correct)
-                                                        checked
-                                                    @endif
-                                                >
-                                            </span>
+                                        <div class="input-group mb-1">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">
+                                                    <input
+                                                        type="checkbox" name="answers[0][isTrue]"
+
+                                                        @if($answer->is_correct)
+                                                            checked
+                                                        @endif
+                                                    >
+                                                </span>
+                                            </div>
+                                            <input
+                                                type="text" class="form-control" name="{{ $answer->text }}"
+                                                value="{{ $answer->text }}"
+                                            >
                                         </div>
-                                        <input
-                                            type="text" class="form-control" name="answers[0][text]"
-                                            value="{{ old('answers[0]') ?? $question->answers[0]->text }}"
-                                        >
-                                    </div>
-                                    <div class="input-group mb-1">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">
-                                                <input
-                                                    type="checkbox" name="answers[1][isTrue]"
-                                                    @if($question->answers[1]->is_correct)
-                                                        checked
-                                                    @endif
-                                                >
-                                            </span>
-                                        </div>
-                                        <input
-                                            type="text" class="form-control" name="answers[1][text]"
-                                            value="{{ old('answers[1]') ?? $question->answers[1]->text }}"
-                                        >
-                                    </div>
-                                    <div class="input-group mb-1">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">
-                                                <input
-                                                    type="checkbox" name="answers[2][isTrue]"
-                                                    @if($question->answers[2]->is_correct)
-                                                        checked
-                                                    @endif
-                                                >
-                                            </span>
-                                        </div>
-                                        <input
-                                            type="text" class="form-control" name="answers[2][text]"
-                                            value="{{ old('answers[2]') ?? $question->answers[2]->text }}"
-                                        >
-                                    </div>
-                                    <div class="input-group mb-1">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">
-                                                <input
-                                                    type="checkbox" name="answers[3][isTrue]"
-                                                    @if($question->answers[3]->is_correct)
-                                                        checked
-                                                    @endif
-                                                >
-                                            </span>
-                                        </div>
-                                        <input
-                                            type="text" class="form-control" name="answers[3][text]"
-                                            value="{{ old('answers[3]') ?? $question->answers[3]->text }}"
-                                        >
-                                    </div>
-                                    <div class="input-group mb-1">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">
-                                                <input
-                                                    type="checkbox" name="answers[4][isTrue]"
-                                                    @if($question->answers[4]->is_correct)
-                                                        checked
-                                                    @endif
-                                                >
-                                            </span>
-                                        </div>
-                                        <input
-                                            type="text" class="form-control" name="answers[4][text]"
-                                            value="{{ old('answers[4]') ?? $question->answers[4]->text }}"
-                                        >
-                                    </div>
+                                    @endforeach
                                 </div>
                             </div>
 

@@ -15,7 +15,7 @@ class Answer extends Model
      *
      * @var array
      */
-    protected $fillable = ['text', 'is_correct'];
+    protected $fillable = ['text', 'is_correct', 'question_id'];
 
     /**
      * Get the question that owns the Answer

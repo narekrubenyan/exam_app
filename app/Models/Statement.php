@@ -15,7 +15,7 @@ class Statement extends Model
      *
      * @var array
      */
-    protected $fillable = ['text', 'question_id'];
+    protected $fillable = ['text', 'question_id', 'question_id'];
 
     /**
      * Get the question that owns the Statement
