@@ -1,0 +1,6 @@
+52. Հիգիենիկ ցուցանիշ է.
+ա) PI
+բ) DI-S
+գ) PMA
+դ) CPITN
+right answer բ)

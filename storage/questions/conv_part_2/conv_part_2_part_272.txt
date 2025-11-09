@@ -1,0 +1,6 @@
+44. Լրիվ կերամիկական պսակի համար ցանկալի է հարթակի հետ ևյալ տեսակը
+ա) Knife edge
+բ) Shoulder
+գ) Chamfer
+դ) Bevel ed shoulder
+right answer բ)

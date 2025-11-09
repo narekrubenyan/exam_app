@@ -1,0 +1,12 @@
+83. Ծամիչ մկաններն են
+1. m.temporalis
+2. m.masseter
+3. m.pterygoideus medialis (interna)
+4. m.pterygoideus lateralis (externa)
+5. m.digastricus
+6. m.platisma
+ա) 2.3.4.
+բ) 1.2.3.4.
+գ) 3.4.5.6.
+դ) բոլորը
+right answer բ)

@@ -1,0 +1,7 @@
+77. Էսթետիկ հարթություն ըստ Ricketts-ի
+ա)MP
+բ) NSL
+գ) FH
+դ) NL
+ե) EN-ДТ
+right answer ե)

@@ -1,0 +1,11 @@
+3.Ինֆիլտրացիոն անզգայացման համար պիտանի չեն հետևյալ դեղերը
+1.Cocainum
+2.Anaesthesium
+3.Novocanium
+4.Bupivacainum
+5. Lidocainum
+ա) 1.2.
+բ) 2.3.
+գ) 3.4.5.
+դ) բոլորը
+right answer ա)

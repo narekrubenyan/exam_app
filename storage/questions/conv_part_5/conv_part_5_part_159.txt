@@ -1,0 +1,10 @@
+129. Բերանի խոռոչում ամենից հաճախ հանդիպող սնկերից են )մի քանի սխալ)
+1.candida shampinionis
+2.candida cruzei
+3.candida albicans
+4.candida tropicalis
+ա) 2, 3
+բ) 1, 4
+գ) բոլորը
+դ) 1, 2, 4
+right answer դ)

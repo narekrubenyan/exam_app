@@ -1,0 +1,7 @@
+15. Հաjտնի են հետևյալ հարթակները, բացի
+ա) Shoulder
+բ) Knife-edge
+գ) Beveled-shoulder
+դ) Edge
+ե) Chamfer
+right answer դ)
