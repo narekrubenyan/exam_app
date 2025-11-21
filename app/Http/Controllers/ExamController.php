@@ -46,7 +46,7 @@ class ExamController extends Controller
     public function showQuestion($index)
     {
         $this->studentService->deactivate(session('student_id'));
-    
+
         $questions = session('exam_questions', []);
         if (!isset($questions[$index])) {
             return redirect()->route('exam.results');
@@ -66,7 +66,6 @@ class ExamController extends Controller
 
         return view('exam.question', [
             'test' => [
-                'category' => session('test')['category']['name'],
                 'option' => session('test')['option']['name'],
             ],
             'question' => $question,
@@ -83,7 +82,6 @@ class ExamController extends Controller
 
         $this->examService->storeExam([
             'student_id' => session('student_id'),
-            'category' => session('test')['category']['name'],
             'option' => session('test')['option']['name'],
             'questions' => session('exam_questions'),
             'correct_answers' => session('correct_answers'),

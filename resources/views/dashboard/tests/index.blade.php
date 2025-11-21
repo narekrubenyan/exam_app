@@ -19,9 +19,9 @@
     </div>
 
     <section class="content">
-        <div class="container-fluid"> 
+        <div class="container-fluid">
             <div class="col-12">
-                
+
                 @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul>
@@ -56,7 +56,6 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>{{ __('dashboard.categories.category') }}</th>
                                         <th>{{ __('dashboard.tests.option') }}</th>
                                         <th>{{ __('dashboard.change') }}</th>
                                     </tr>
@@ -65,7 +64,6 @@
                                     @foreach ($tests as $test)
                                         <tr>
                                             <td>{{ $loop->iteration }}.</td>
-                                            <td class="text-truncate d-inline-block" style="max-width: 400px;">{{ $test->category->name }}</td>
                                             <td>{{ $test->option->name }}</td>
                                             <td>
                                                 <a href="{{ route('tests.show', $test->id) }}" class="btn btn-info">{{ __('dashboard.view') }}</a>

@@ -22,6 +22,7 @@ return [
         'question' => 'Հարց',
         'questions' => 'Հարցեր',
         'questionsTable' => 'Հարցերի աղյուսակ',
+        'questionsCount' => 'Հարցերի քանակ',
         'addQuestion' => 'Ավելացնել հարց',
         'editQuestion' => 'Խմբագրել հարցը',
         'statement' => 'Պնդում',

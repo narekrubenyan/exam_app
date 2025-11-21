@@ -191,6 +191,7 @@ return [
         'password' => __('fields.password'),
         'name' => __('fields.name'),
         'category_id' => __('fields.category'),
+        'categories' => __('fields.categories'),
         'login_code' => __('fields.login_code')
     ],
 

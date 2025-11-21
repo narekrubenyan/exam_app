@@ -3,7 +3,6 @@
 @section('content')
 <div class="container">
 
-    <h3 class="h3">{{ $test['category'] }}</h3>
     <h5 class="h5">{{ $test['option'] }}</h5>
 
     <div class="card">
@@ -44,9 +43,9 @@
                             required
                         >
                         <label
-                            class="form-check-label 
-                            @if ($correctId && $answer->id == $correctId) text-success 
-                            @elseif ($submittedAnswer == $answer->id) text-danger @endif" 
+                            class="form-check-label
+                            @if ($correctId && $answer->id == $correctId) text-success
+                            @elseif ($submittedAnswer == $answer->id) text-danger @endif"
                             for="{{ $inputId }}"
                         >{{ $answer->text }}</label>
                     </div>

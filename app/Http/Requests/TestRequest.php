@@ -22,7 +22,8 @@ class TestRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'category_id' => 'required'
+            'categories' => 'required|array',
+            'count' => 'required|integer'
         ];
     }
 }

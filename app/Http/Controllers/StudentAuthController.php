@@ -20,12 +20,11 @@ class StudentAuthController extends Controller
     public function login(Request $request)
     {
         $request->validate([
-            'category_id' => 'required',
             'name' => 'required|string|max:255',
             'surname' => 'required|string|max:255',
             'login_code' => 'required',
         ]);
-        
+
         $student = Student::where([
             'name' => $request->name,
             'surname' => $request->surname,
@@ -66,9 +65,9 @@ class StudentAuthController extends Controller
 
     private function assignTest($categoryId)
     {
-        $testIds = Test::where('category_id', $categoryId)->pluck('id')->toArray();
+        $testIds = Test::pluck('id')->toArray();
 
-        if (empty($testIds)) {
+        if (empty($testIds)) {  
             return false;
         }
 

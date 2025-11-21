@@ -52,15 +52,14 @@ class ExamService
 
             $testResult = TestResult::create([
                 'student_id' => $data['student_id'],
-                'category' => $data['category'],
                 'option' => $data['option'],
                 'score' => $score,
             ]);
 
             $questions = Question::whereIn('id', $data['questions'])->get();
-        
+
             foreach ($questions as $question) {
-                
+
                 $correctAnswer = $question->answers()->where('is_correct', true)->first()->text;
 
                 $selected = $question->answers()
@@ -73,7 +72,7 @@ class ExamService
                     'test_result_id' => $testResult->id,
                     'question_title' => $question->title,
                     'statements' => $question->statements,
-                    'possible_answers' => $question->answers->pluck('text')->toArray(),                    
+                    'possible_answers' => $question->answers->pluck('text')->toArray(),
                     'correct_answer' => $correctAnswer ?? 'UNKNOWN',
                     'selected_answer' => $selected ?? 'UNKNOWN',
                     'is_correct' => $isCorrect,

@@ -5,9 +5,6 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">{{ __('dashboard.questions.questions') }} | {{ $test->category->name }}</h1>
-                </div>
-                <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">{{ __('dashboard.main') }}</a></li>
                         <li class="breadcrumb-item active">{{ __('dashboard.questions.questions') }}</li>
@@ -32,7 +29,10 @@
                                         <td>
                                             <div class="post">
                                                 <div>
-                                                    <h5>{{ __('dashboard.questions.question') }} - {{ $loop->iteration }}</h5>
+                                                    <div class="d-flex">
+                                                        <h5>{{ __('dashboard.questions.question') }} - {{ $loop->iteration }} </h5>
+                                                        <p>( {{ $question->category->name }} )</p>
+                                                    </div>
                                                     <p>
                                                         {{ $question->title }}
                                                     </p>

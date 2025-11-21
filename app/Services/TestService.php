@@ -14,56 +14,89 @@ use Illuminate\Support\Facades\DB;
  */
 class TestService
 {
-    public function createOrUpdate($categoryId)
+    public function createOrUpdate($data)
     {
         DB::beginTransaction();
+
         try {
-            $category = Category::findOrFail($categoryId);
+            $categoryIds = $data['categories'];   // массив категорий
+            $requiredTotal = $data['count'];      // например 20
+
+            $categories = Category::whereIn('id', $categoryIds)->get();
             $options = Option::all();
-                    
-            $options->each(function ($option) use ($category) {
-                $questions = Question::where('category_id', $category->id)
-                    ->inRandomOrder()
-                    ->take(20)
-                    ->get();
-        
-                if ($questions->count() < 20) {
-                    DB::rollBack();
-                    return redirect()
-                        ->back()
-                        ->withErrors(['name' => __('messages.tests.questionCountMinError', [
-                            'category' => $category->name
-                        ])])
-                        ->withInput();
+
+            // Проверка, что вопросов достаточно
+            $totalAvailable = Question::whereIn('category_id', $categoryIds)->count();
+
+            if ($totalAvailable < $requiredTotal) {
+                DB::rollBack();
+                return back()
+                    ->withErrors(['name' => 'Недостаточно вопросов в выбранных категориях'])
+                    ->withInput();
+            }
+
+            // Равномерное распределение количества
+            $categoryCount = count($categoryIds);
+
+            $perCategory = intdiv($requiredTotal, $categoryCount);
+            $remainder = $requiredTotal % $categoryCount;
+
+            // Сколько вопросов брать из каждой категории
+            $distribution = [];
+
+            foreach ($categoryIds as $catId) {
+                $distribution[$catId] = $perCategory;
+
+                if ($remainder > 0) {
+                    $distribution[$catId]++;
+                    $remainder--;
                 }
-        
-                $test = Test::where('category_id', $category->id)
-                    ->where('option_id', $option->id)
-                    ->first();
-        
-                if ($test) {
-                    $test->questions()->sync($questions->pluck('id'));
-                } else {
+            }
+
+            // Для каждого варианта — создаём или обновляем тест
+            foreach ($options as $option) {
+
+                $selectedQuestions = collect();
+
+                foreach ($distribution as $catId => $count) {
+                    $questions = Question::where('category_id', $catId)
+                        ->inRandomOrder()
+                        ->take($count)
+                        ->get();
+
+                    $selectedQuestions = $selectedQuestions->merge($questions);
+                }
+
+                $selectedIds = $selectedQuestions->pluck('id')->unique();
+
+                if ($selectedIds->count() < $requiredTotal) {
+                    DB::rollBack();
+                    throw new \Exception("Недостаточно вопросов для варианта {$option->id}");
+                }
+
+                // Ищем тест по варианту (category_id больше нет)
+                $test = Test::where('option_id', $option->id)->first();
+
+                if (!$test) {
                     $test = Test::create([
-                        'category_id' => $category->id,
                         'option_id' => $option->id,
                     ]);
-        
-                    $test->questions()->attach($questions->pluck('id'));
                 }
-            });
-        
+
+                // Записываем вопросы
+                $test->questions()->sync($selectedIds);
+            }
+
             DB::commit();
-            return redirect()->route('tests.index')->with('success', __('messages.tests.testsCreated'));
+            return redirect()->route('tests.index')->with('success', 'Варианты успешно созданы');
+
         } catch (\Exception $e) {
             DB::rollBack();
             report($e);
-        
-            return redirect()
-                ->back()
+
+            return back()
                 ->withErrors(['error' => $e->getMessage()])
                 ->withInput();
         }
-        
     }
 }

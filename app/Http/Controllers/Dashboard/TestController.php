@@ -24,7 +24,7 @@ class TestController extends Controller
 
     public function show(string $id)
     {
-        $test = Test::with('questions')->find($id);
+        $test = Test::with('questions.category')->find($id);
 
         return view('dashboard.tests.show', compact('test'));
     }
@@ -40,7 +40,7 @@ class TestController extends Controller
     {
         $data = $request->validated();
 
-        $this->testService->createOrUpdate($data['category_id']);
+        $this->testService->createOrUpdate($data);
 
         return redirect()->route('tests.index');
     }

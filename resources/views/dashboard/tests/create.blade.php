@@ -35,19 +35,24 @@
                         @csrf
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">{{ __('dashboard.questions.addQuestion') }}</h3>
+                                <h3 class="card-title">{{ __('dashboard.categories.chooseCategory') }}</h3>
                             </div>
-                            
+
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label>{{ __('dashboard.select') . ' ' .  __('dashboard.categories.category') }}</label>
-                                    <select name="category_id" class="form-control">
-                                        <option value="null" disabled selected>{{ __('dashboard.categories.chooseCategory') }}</option>
-                                        @foreach ($categories as $category)
-                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                        @endforeach
-                                    </select>
+                                    <label for="questionsCount">{{ __('dashboard.questions.questionsCount') }}</label>
+                                    <input type="number" class="form-control" id="questionsCount" name="count">
                                 </div>
+                            </div>
+
+                            <div class="card-body">
+                                <p class="bold">{{ __('dashboard.select') . ' ' .  __('dashboard.categories.categories') }}</p>
+                                @foreach ($categories as $category)
+                                    <div class="custom-control custom-checkbox">
+                                        <input name="categories[]" class="custom-control-input" type="checkbox" id="category{{$category->id}}" value="{{$category->id}}">
+                                        <label for="category{{$category->id}}" class="custom-control-label">{{ $category->name }}</label>
+                                    </div>
+                                @endforeach
                             </div>
 
                             <div class="card-footer">
