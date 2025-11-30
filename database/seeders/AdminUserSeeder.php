@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class AdminUserSeeder extends Seeder
 {
@@ -13,10 +13,17 @@ class AdminUserSeeder extends Seeder
      */
     public function run(): void
     {
-        User::query()->create([
-            'username' => 'admin',
-            'email' => 'moderator@test.am',
-            'password' => Hash::make('test1234')
+        DB::table('users')->insert([
+            [
+                'username' => 'admin',
+                'email' => 'admin@test.am',
+                'password' => Hash::make('test1234')
+            ],
+            [
+                'username' => 'admin-armedin-2025',
+                'email' => 'admin-armedin@test.am',
+                'password' => Hash::make('Armedin-2025-pass')
+            ]
         ]);
     }
 }
