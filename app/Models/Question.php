@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\Models\Test;
-use App\Models\Category;
+use App\Models\Subcategory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -19,7 +19,7 @@ class Question extends Model
      *
      * @var array
      */
-    protected $fillable = ['title', 'category_id'];
+    protected $fillable = ['title', 'subcategory_id'];
 
     /**
      * Get all of the answers for the Question
@@ -42,13 +42,13 @@ class Question extends Model
     }
 
     /**
-     * Get the category that owns the Question
+     * Get the subcategory that owns the Question
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function category(): BelongsTo
+    public function subcategory(): BelongsTo
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Subcategory::class);
     }
 
     /**

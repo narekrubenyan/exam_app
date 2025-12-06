@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Models\Answer;
 use App\Models\Category;
+use App\Models\Subcategory;
 use App\Models\Question;
 use App\Models\Statement;
 use Illuminate\Console\Command;
@@ -26,14 +27,14 @@ class ImportTxtQuestions extends Command
             }
         }
 
-        $currentCategory = null;
+        $currentSubcategory = null;
 
         if (empty($files)) {
             $this->warn('No .txt files found in ' . $folder);
             return;
         }
 
-        $currentCategory = null;
+        $currentSubcategory = null;
 
         if (empty($files)) {
             $this->warn('No .txt files found in storage/questions/');
@@ -48,8 +49,8 @@ class ImportTxtQuestions extends Command
 
             $firstLine = $lines[0];
             if (!preg_match('/^\d/', $firstLine)) {
-                $categoryName = $firstLine;
-                $currentCategory = Category::firstOrCreate(['name' => $categoryName]);
+                $subcategoryName = $firstLine;
+                $currentSubcategory = Subcategory::firstOrCreate(['name' => $subcategoryName]);
                 unset($lines[0]);
                 $lines = array_values($lines);
             }
@@ -62,7 +63,7 @@ class ImportTxtQuestions extends Command
             $questionTitle = trim($qMatch[1]);
             $question = Question::create([
                 'title' => $questionTitle,
-                'category_id' => $currentCategory ? $currentCategory->id : null,
+                'subcategory_id' => $currentSubcategory ? $currentSubcategory->id : null,
             ]);
             unset($lines[0]);
             $lines = array_values($lines);
