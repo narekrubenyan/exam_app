@@ -21,7 +21,7 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        $questions = Question::with('category')->orderBy('id', 'desc')->paginate(30);
+        $questions = Question::with('subcategory')->orderBy('id', 'desc')->paginate(30);
 
         $currentPage = Paginator::resolveCurrentPage();
         if ($currentPage > $questions->lastPage()) {

@@ -49,8 +49,8 @@
                                             <td>{{ $loop->iteration }}.</td>
                                             <td class="text-truncate d-inline-block" style="max-width: 400px;">{{ $question->title }}</td>
                                             <td>
-                                                @if ( $question->category )
-                                                    <p>{{ $question->category->name }}</p>
+                                                @if ( $question->subcategory )
+                                                    <p>{{ $question->subcategory->name }}</p>
                                                 @else
                                                     <p class="text-black"> {{ __('dashboard.notSeted') }} </p>
                                                 @endif

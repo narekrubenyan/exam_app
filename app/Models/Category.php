@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Question;
+use App\Models\Subcategory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -26,5 +27,15 @@ class Category extends Model
     public function questions(): HasMany
     {
         return $this->hasMany(Question::class);
+    }
+
+    /**
+     * Get all of the subcategories for the Category
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function subcategories(): HasMany
+    {
+        return $this->hasMany(Subcategory::class);
     }
 }
