@@ -1,7 +1,5 @@
-11. Տոնի ցուցանիշը նորմայում հավասար է`
-ա) 1,33*
-բ) 2,45
-գ) 6,5
-դ) 3
-ե) 4
-right answer ա)
+18. Մանդիբուլյար անզգայացման ժամանակ անջատվում են
+ա) միայն n.mandibularis
+բ) n.mandibularis, n.lingvalis
+գ) n.mandibularis, n.lingvalis, n. Buccalis
+right answer բ)

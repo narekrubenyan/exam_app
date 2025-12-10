@@ -1,11 +1,6 @@
-98. Որ արմատալեցման գործիքն է նախատեսված ծայրակալի համար
-1. արմատալեցիչ
-2. սպրեդեր
-3. պլագեր
-4. գուտա-կոնդենսոր
-ա) 1.2.3.
-բ) 2.3.4.
-գ) 2.3.
-դ)1. 4.
-ե) 2.4.
+39. Արմատուղու անցման համար նախատեսված գործիքներն են
+ա) Kևfile, Kևreamer
+բ) Kևflexoreamer, Kևreamer, Largo
+գ) Hևfile, Nitiflexևfile
+դ) Kևflexoreamer golden medium, Kևreamer, Kևreamer forside
 right answer դ)

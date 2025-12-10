@@ -1,4 +1,12 @@
-131. Քնած ժամանակ թքարտադրությունը
-ա) շատանում է
-բ) քչանում է
-right answer բ)
+89. Ենթալեզվային ոսկրին կպնում են
+1. m.mylohyoideus
+2. m.digastricus
+3. m.geniohyoideus
+4. m.genioglossus
+5. m.platisma
+ա) 1.2.3.
+բ) 1.3.5.
+գ) 4.5.
+դ)2.4.5.
+ե) բոլորը
+right answer ա)

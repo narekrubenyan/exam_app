@@ -1,6 +1,5 @@
-39. Արմատուղու անցման համար նախատեսված գործիքներն են
-ա) Kևfile, Kևreamer
-բ) Kևflexoreamer, Kևreamer, Largo
-գ) Hևfile, Nitiflexևfile
-դ) Kևflexoreamer golden medium, Kևreamer, Kևreamer forside
-right answer դ)
+79. Որ էլևատորի թշիկն է գտնվում անկյան տակ ձողի նկատմամբ
+ա) ուղիղ
+բ) անկյունավոր
+գ) Լեկլյուզի
+right answer բ)

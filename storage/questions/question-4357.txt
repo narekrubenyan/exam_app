@@ -1,7 +1,5 @@
-38. Արմատուղու լայնեցման համար նախատեսված գործիքներն են
-ա) K-flexoreamer, K-flexofile
-բ) K-nitiflex file, K-flexofile golden medium
-գ) Peeso reamer, K-file
-դ) Միլլերի ասեղ
-ե) spreder, K-flexofile
-right answer բ)
+78. Որ էլևատորի ձողն է գտնվում ուղիղ անկյան տակ բռնակի նկատմամբ
+ա) ուղիղ
+բ) անկյունավոր
+գ) Լեկլյուզի
+right answer գ)

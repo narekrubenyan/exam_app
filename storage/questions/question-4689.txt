@@ -1,6 +1,5 @@
-12. Պոնի պրեմոլյարների ցուցանիշը հավասար է`
-ա) 80*
-բ) 71
-գ) 49
-դ) 45
-right answer ա)
+19. Տորուսալ անզգայացման ժամանակ անջատվում են
+ա) միայն n.mandibularis
+բ) n.mandibularis, n.lingvalis
+գ) n.mandibularis, n.lingvalis, n. Buccalis
+right answer գ)
