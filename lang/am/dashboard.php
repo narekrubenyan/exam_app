@@ -17,6 +17,7 @@ return [
     'select' => 'Ընտրել',
     'name' => 'Անուն',
     'more' => 'Ավելին',
+    'all' => 'Բոլոր',
 
     'questions' => [
         'question' => 'Հարց',
@@ -37,6 +38,15 @@ return [
         'addCategory' => 'Ավելացնել Թեմա',
         'editCategory' => 'Խմբագրել Թեման',
         'chooseCategory' => 'Նշեք թեման'
+    ],
+
+    'subcategories' => [
+        'subcategory' => 'Ենթաթեմա',
+        'subcategories' => 'Ենթաթեմաներ',
+        'subcategoriesTable' => 'Ենթաթեմաների աղյուսակ',
+        'addSubcategory' => 'Ավելացնել Ենթաթեմա',
+        'editSubcategory' => 'Խմբագրել Ենթաթեման',
+        'chooseSubcategory' => 'Նշեք Ենթաթեման'
     ],
 
     'tests' => [

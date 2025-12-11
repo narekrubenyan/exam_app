@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Models\Category;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Pagination\Paginator;
 use App\Http\Requests\CategoryRequest;
@@ -71,8 +70,8 @@ class CategoryController extends Controller
     {
         $data = $request->validated();
 
-        $student = Category::findOrFail($id);
-        $student->update($data);
+        $category = Category::findOrFail($id);
+        $category->update($data);
 
         return redirect()->route('categories.index');
     }

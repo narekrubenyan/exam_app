@@ -1,7 +1,5 @@
 <?php
 
-use App\Models\Test;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\TestController;
 use App\Http\Controllers\Dashboard\StudentController;
@@ -9,6 +7,7 @@ use App\Http\Controllers\Dashboard\CategoryController;
 use App\Http\Controllers\Dashboard\QuestionController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\TestResultController;
+use App\Http\Controllers\Dashboard\SubcategoryController;
 
 
 Route::prefix('dashboard')
@@ -18,6 +17,7 @@ Route::prefix('dashboard')
 
     Route::resource('questions', QuestionController::class);
     Route::resource('categories', CategoryController::class);
+    Route::resource('subcategories', SubcategoryController::class);
     Route::resource('tests', TestController::class);
     Route::resource('students', StudentController::class);
 
