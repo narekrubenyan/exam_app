@@ -7,8 +7,10 @@ use App\Models\Question;
 use Illuminate\Http\Request;
 use App\Services\QuestionService;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\FilterRequest;
 use Illuminate\Pagination\Paginator;
 use App\Http\Requests\QuestionRequest;
+use App\Models\Subcategory;
 
 class QuestionController extends Controller
 {
@@ -19,16 +21,31 @@ class QuestionController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(FilterRequest $request)
     {
-        $questions = Question::with('subcategory')->orderBy('id', 'desc')->paginate(30);
+        $data = $request->validated();
+
+        $subcategories = Subcategory::select('id', 'name')->get();
+
+
+        $query = Question::with('subcategory');
+
+        if ($request->query('category_id')) {
+            $query->where('subcategory_id', $request->query('category_id'));
+        }
+
+        if ($request->query('table_search')) {
+            $query->where('title', 'like', '%' . $request->query('table_search') . '%');
+        }
+
+        $questions = $query->orderBy('id', 'desc')->paginate(30)->withQueryString();
 
         $currentPage = Paginator::resolveCurrentPage();
         if ($currentPage > $questions->lastPage()) {
             return redirect()->route('questions.index', ['page' => 1]);
         }
 
-        return view('dashboard.questions.index', compact('questions'));
+        return view('dashboard.questions.index', compact('questions', 'subcategories'));
     }
 
     /**

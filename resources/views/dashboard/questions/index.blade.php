@@ -19,65 +19,100 @@
 
     <section class="content">
         <div class="container-fluid">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">{{ __('dashboard.questions.questionsTable') }}</h3>
-                        <div class="card-tools">
-                            <div>
-                                <a href="{{ route('questions.create') }}" class="btn btn-block btn-primary">{{ __('dashboard.questions.addQuestion') }}</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    @if (!count($questions))
-                        <div class="card-body"><h1><b>0</b> {{ __('dashboard.questions.question') }}</h1></div>
-                    @else
-                        <div class="card-body p-0">
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>{{ __('dashboard.questions.question') }}</th>
-                                        <th>{{ __('dashboard.categories.category') }}</th>
-                                        <th>{{ __('dashboard.change') }}</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($questions as $question)
-                                        <tr>
-                                            <td>{{ $loop->iteration }}.</td>
-                                            <td class="text-truncate d-inline-block" style="max-width: 400px;">{{ $question->title }}</td>
-                                            <td>
-                                                @if ( $question->subcategory )
-                                                    <p>{{ $question->subcategory->name }}</p>
-                                                @else
-                                                    <p class="text-black"> {{ __('dashboard.notSeted') }} </p>
-                                                @endif
-                                            </td>
-                                            <td>
-                                                <span><a href="{{ route('questions.edit', $question->id) }}" class="btn btn-warning">{{ __('dashboard.edit') }}</a></span>
-                                                <span>
-                                                    <form action="{{ route('questions.destroy', $question->id) }}" method="POST" class="d-inline-block">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <input type="submit" value="{{ __('dashboard.delete') }}" class="btn btn-danger">
-                                                    </form>
-                                                </span>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-
-                            <div class="card-footer">
-                                {{ $questions->withQueryString()->links() }}
-                            </div>
-                        </div>
-                    @endif
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">{{ __('dashboard.questions.questionsTable') }}</h3>
                 </div>
-            </div>
+                <div class="card-body">
+                    <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6">
+                                <form id="filterForm" method="GET" action="{{ route('questions.index') }}" class="d-flex gap-2 align-items-center">
+                                    <select name="category_id" id="categorySelect" class="form-select btn btn-default text-left" style="width: 200px;" onchange="this.form.submit()">
+                                        <option value="">{{ __('dashboard.all') }} {{ __('dashboard.categories.categories') }}</option>
+                                        @foreach($subcategories as $subcategory)
+                                            <option value="{{ $subcategory->id }}" {{ request('category_id') == $subcategory->id ? 'selected' : '' }}>
+                                                {{ $subcategory->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
 
+                                    <div class="input-group input-group-sm ml-2" style="width: 150px;">
+                                        <input type="text" name="table_search" class="form-control float-right" placeholder="Search"
+                                            value="{{ request('table_search') }}">
+                                        <div class="input-group-append">
+                                            <button type="submit" class="btn btn-default">
+                                                <i class="fas fa-search"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <a href="{{ route('questions.create') }}" class="btn btn-primary mr-2">
+                                    {{ __('dashboard.questions.addQuestion') }}
+                                </a>
+                            </div>
+                        </div>
+                        @if (!count($questions))
+                            <div class="card-body"><h1><b>0</b> {{ __('dashboard.questions.question') }}</h1></div>
+                        @else
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table id="example1" class="table table-bordered table-striped dataTable dtr-inline"
+                                        aria-describedby="example1_info">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>{{ __('dashboard.questions.question') }}</th>
+                                                <th>{{ __('dashboard.subcategories.subcategory') }}</th>
+                                                <th>{{ __('dashboard.change') }}</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($questions as $question)
+                                                <tr>
+                                                    <td>{{ $loop->iteration }}.</td>
+                                                    <td>{{ $question->title }}</td>
+                                                    <td>{{ $question->subcategory->name }}</td>
+                                                    <td class="d-flex">
+                                                        <span class="mr-1">
+                                                            <a href="{{ route('questions.edit', $question->id) }}"
+                                                                class="btn btn-warning">{{ __('dashboard.edit') }}</a>
+                                                        </span>
+                                                        <span>
+                                                            <form action="{{ route('questions.destroy', $question->id) }}"
+                                                                method="POST" class="d-inline-block">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <input type="submit" value="{{ __('dashboard.delete') }}"
+                                                                    class="btn btn-danger">
+                                                            </form>
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>{{ __('dashboard.questions.question') }}</th>
+                                                <th>{{ __('dashboard.subcategories.subcategory') }}</th>
+                                                <th>{{ __('dashboard.change') }}</th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                            @endif
+                    </div>
+                </div>
+                <div class="card-header">
+                    {{ $questions->withQueryString()->links() }}
+                </div>
+
+            </div>
         </div>
     </section>
 

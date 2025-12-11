@@ -119,11 +119,3 @@
     </section>
 
 @endsection
-
-@section('scripts')
-    <script>
-        document.getElementById('categorySelect').addEventListener('change', function() {
-            document.getElementById('filterForm').submit();
-        });
-    </script>
-@endsection
