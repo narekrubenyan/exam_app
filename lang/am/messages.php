@@ -11,5 +11,7 @@ return [
     'tests' => [
         'testsCreated' => 'Թեստերը հաջողությամբ կազմվեց',
         'questionCountMinError' => 'Հարցեր քանակը ":category" թմայում 20-ից պակաս է'
-    ]
+    ],
+
+    'variants_created' => 'Տարբերակները հաջողությամբ ստեղծվեցին',
 ];

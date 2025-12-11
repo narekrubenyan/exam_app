@@ -6,7 +6,7 @@ use App\Models\Test;
 use App\Models\Option;
 use App\Models\Category;
 use App\Models\Question;
-use App\Models\TestQuestions;
+use App\Models\Subcategory;
 use Illuminate\Support\Facades\DB;
 
 /**
@@ -19,14 +19,15 @@ class TestService
         DB::beginTransaction();
 
         try {
-            $categoryIds = $data['categories'];   // массив категорий
-            $requiredTotal = $data['count'];      // например 20
+            $categoryIds = $data['categories'];
+            $requiredTotal = $data['count'];
 
             $categories = Category::whereIn('id', $categoryIds)->get();
             $options = Option::all();
 
-            // Проверка, что вопросов достаточно
-            $totalAvailable = Question::whereIn('category_id', $categoryIds)->count();
+            $subcategories = Subcategory::whereIn('category_id', $categoryIds)->pluck('id');
+
+            $totalAvailable = Question::whereIn('subcategory_id', $subcategories)->count();
 
             if ($totalAvailable < $requiredTotal) {
                 DB::rollBack();
@@ -35,15 +36,11 @@ class TestService
                     ->withInput();
             }
 
-            // Равномерное распределение количества
             $categoryCount = count($categoryIds);
-
             $perCategory = intdiv($requiredTotal, $categoryCount);
             $remainder = $requiredTotal % $categoryCount;
 
-            // Сколько вопросов брать из каждой категории
             $distribution = [];
-
             foreach ($categoryIds as $catId) {
                 $distribution[$catId] = $perCategory;
 
@@ -53,13 +50,14 @@ class TestService
                 }
             }
 
-            // Для каждого варианта — создаём или обновляем тест
             foreach ($options as $option) {
 
                 $selectedQuestions = collect();
 
                 foreach ($distribution as $catId => $count) {
-                    $questions = Question::where('category_id', $catId)
+                    $subcatIds = Subcategory::where('category_id', $catId)->pluck('id');
+
+                    $questions = Question::whereIn('subcategory_id', $subcatIds)
                         ->inRandomOrder()
                         ->take($count)
                         ->get();
@@ -74,7 +72,6 @@ class TestService
                     throw new \Exception("Недостаточно вопросов для варианта {$option->id}");
                 }
 
-                // Ищем тест по варианту (category_id больше нет)
                 $test = Test::where('option_id', $option->id)->first();
 
                 if (!$test) {
@@ -83,13 +80,12 @@ class TestService
                     ]);
                 }
 
-                // Записываем вопросы
                 $test->questions()->sync($selectedIds);
             }
 
             DB::commit();
-            return redirect()->route('tests.index')->with('success', 'Варианты успешно созданы');
 
+            return redirect()->route('tests.index')->with('success', __('messages.variants_created'));
         } catch (\Exception $e) {
             DB::rollBack();
             report($e);
@@ -99,4 +95,5 @@ class TestService
                 ->withInput();
         }
     }
+
 }

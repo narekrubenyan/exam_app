@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Models\Test;
 use App\Models\Category;
-use Illuminate\Http\Request;
 use App\Services\TestService;
 use App\Http\Requests\TestRequest;
 use App\Http\Controllers\Controller;
@@ -24,7 +23,7 @@ class TestController extends Controller
 
     public function show(string $id)
     {
-        $test = Test::with('questions.category')->find($id);
+        $test = Test::with('questions.subcategory')->find($id);
 
         return view('dashboard.tests.show', compact('test'));
     }

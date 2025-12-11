@@ -31,7 +31,7 @@
                                                 <div>
                                                     <div class="d-flex">
                                                         <h5>{{ __('dashboard.questions.question') }} - {{ $loop->iteration }} </h5>
-                                                        <p>( {{ $question->category->name }} )</p>
+                                                        <p>( {{ $question->subcategory->name }} )</p>
                                                     </div>
                                                     <p>
                                                         {{ $question->title }}
