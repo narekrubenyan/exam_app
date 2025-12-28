@@ -6,5 +6,7 @@ return [
     'name' => 'Անուն',
     'category' => 'Թեմա',
     'categories' => 'Թեմաներ',
-    'login_code' => 'Մուտքի կոդ'
+    'login_code' => 'Մուտքի կոդ',
+    'time' => 'Ժամանակ',
+    'count' => 'քանակ',
 ];

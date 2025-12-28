@@ -17,18 +17,17 @@
         </div>
     </div>
 
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-
     <section class="content">
         <div class="container-fluid">
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <div class="row">
                 <div class="col-12">
                     <form  method="POST" action="{{ route('tests.store') }}" enctype="multipart/form-data">
@@ -41,18 +40,23 @@
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="questionsCount">{{ __('dashboard.questions.questionsCount') }}</label>
-                                    <input type="number" class="form-control" id="questionsCount" name="count">
+                                    <input type="number" class="form-control" id="questionsCount" name="count" value="{{ old('count') }}">
                                 </div>
-                            </div>
 
-                            <div class="card-body">
-                                <p class="bold">{{ __('dashboard.select') . ' ' .  __('dashboard.categories.categories') }}</p>
-                                @foreach ($categories as $category)
-                                    <div class="custom-control custom-checkbox">
-                                        <input name="categories[]" class="custom-control-input" type="checkbox" id="category{{$category->id}}" value="{{$category->id}}">
-                                        <label for="category{{$category->id}}" class="custom-control-label">{{ $category->name }}</label>
-                                    </div>
-                                @endforeach
+                                <div class="form-group">
+                                    <label class="bold" for="category">{{ __('dashboard.select') . ' ' .  __('dashboard.categories.category') }}</label>
+                                    <select name="category_id" class="form-control" id="category">
+                                        <option value="0" selected disabled>{{ __('dashboard.categories.category') }}</option>
+                                        @foreach ($categories as $category)
+                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="time">{{ __('dashboard.time') . ' (' .  __('dashboard.minute') . ')' }}</label>
+                                    <input type="number" class="form-control" id="time" name="time" value="{{ old('time') ?? 10 }}">
+                                </div>
                             </div>
 
                             <div class="card-footer">

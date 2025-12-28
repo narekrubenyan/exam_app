@@ -15,10 +15,10 @@ class StudentService
             $student = Student::findOrFail($studentId);
 
             do {
-                $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_+-=';
+                $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
                 $code = substr(str_shuffle(str_repeat($characters, $length)), 0, $length);
             } while (Student::where('login_code', $code)->exists());
-    
+
             $student->update([
                 'login_code' => $code,
                 'test_id' => null
@@ -26,6 +26,5 @@ class StudentService
         } catch (\Exception $e) {
             report($e);
         }
-       
     }
 }

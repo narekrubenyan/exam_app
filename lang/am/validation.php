@@ -21,7 +21,7 @@ return [
     'alpha' => 'The :attribute field must only contain letters.',
     'alpha_dash' => 'The :attribute field must only contain letters, numbers, dashes, and underscores.',
     'alpha_num' => 'The :attribute field must only contain letters and numbers.',
-    'array' => 'The :attribute field must be an array.',
+    'array' => ':attribute դաշտը պետք է զանգված լինի',
     'ascii' => 'The :attribute field must only contain single-byte alphanumeric characters and symbols.',
     'before' => 'The :attribute field must be a date before :date.',
     'before_or_equal' => 'The :attribute field must be a date before or equal to :date.',
@@ -173,6 +173,9 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        'questions' => [
+            'min-count' => 'Ընտրված կատեգորիաներում բավարար հարցեր չկան'
+        ]
     ],
 
     /*
@@ -191,8 +194,11 @@ return [
         'password' => __('fields.password'),
         'name' => __('fields.name'),
         'category_id' => __('fields.category'),
+        'category' => __('fields.category'),
         'categories' => __('fields.categories'),
-        'login_code' => __('fields.login_code')
+        'login_code' => __('fields.login_code'),
+        'time' => __('fields.time'),
+        'count' => __('fields.count'),
     ],
 
 ];

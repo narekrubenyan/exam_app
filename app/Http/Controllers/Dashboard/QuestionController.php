@@ -27,7 +27,6 @@ class QuestionController extends Controller
 
         $subcategories = Subcategory::select('id', 'name')->get();
 
-
         $query = Question::with('subcategory');
 
         if ($request->query('category_id')) {

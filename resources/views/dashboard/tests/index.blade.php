@@ -56,7 +56,9 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
+                                        <th>{{ __('dashboard.categories.category') }}</th>
                                         <th>{{ __('dashboard.tests.option') }}</th>
+                                        <th>{{ __('dashboard.time') }}</th>
                                         <th>{{ __('dashboard.change') }}</th>
                                     </tr>
                                 </thead>
@@ -64,7 +66,9 @@
                                     @foreach ($tests as $test)
                                         <tr>
                                             <td>{{ $loop->iteration }}.</td>
+                                            <td>{{ $test->category->name }}.</td>
                                             <td>{{ $test->option->name }}</td>
+                                            <td>{{ $test->time . ' ' . __('dashboard.minute')}}</td>
                                             <td>
                                                 <a href="{{ route('tests.show', $test->id) }}" class="btn btn-info">{{ __('dashboard.view') }}</a>
                                             </td>

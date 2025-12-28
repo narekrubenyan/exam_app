@@ -27,7 +27,7 @@ class Test extends Model
      *
      * @var array
      */
-    protected $fillable = ['title', 'category_id', 'option_id'];
+    protected $fillable = ['title', 'category_id', 'option_id', 'time'];
 
     /**
      * The questions that belong to the Test

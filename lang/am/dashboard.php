@@ -18,6 +18,8 @@ return [
     'name' => 'Անուն',
     'more' => 'Ավելին',
     'all' => 'Բոլոր',
+    'time' => 'Ժամանակ',
+    'minute' => 'րոպե',
 
     'questions' => [
         'question' => 'Հարց',

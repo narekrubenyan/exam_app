@@ -4,96 +4,78 @@ namespace App\Services;
 
 use App\Models\Test;
 use App\Models\Option;
-use App\Models\Category;
 use App\Models\Question;
 use App\Models\Subcategory;
 use Illuminate\Support\Facades\DB;
 
-/**
- * Class TestService.
- */
 class TestService
 {
-    public function createOrUpdate($data)
+    public function createOrUpdate(array $data)
     {
-        DB::beginTransaction();
+        return DB::transaction(function () use ($data) {
 
-        try {
-            $categoryIds = $data['categories'];
+            $categoryId = $data['category_id'];
             $requiredTotal = $data['count'];
+            $time = $data['time'];
 
-            $categories = Category::whereIn('id', $categoryIds)->get();
-            $options = Option::all();
+            // 1️⃣ Get all subcategories for this category
+            $subcategories = Subcategory::where('category_id', $categoryId)->pluck('id');
 
-            $subcategories = Subcategory::whereIn('category_id', $categoryIds)->pluck('id');
+            // 2️⃣ Get all available questions
+            $questions = Question::whereIn('subcategory_id', $subcategories)->get();
 
-            $totalAvailable = Question::whereIn('subcategory_id', $subcategories)->count();
-
-            if ($totalAvailable < $requiredTotal) {
-                DB::rollBack();
-                return back()
-                    ->withErrors(['name' => 'Недостаточно вопросов в выбранных категориях'])
-                    ->withInput();
+            if ($questions->count() < $requiredTotal * 4) { // 4 options
+                throw new \Exception(__('validation.custom.questions.min-count'));
             }
 
-            $categoryCount = count($categoryIds);
-            $perCategory = intdiv($requiredTotal, $categoryCount);
-            $remainder = $requiredTotal % $categoryCount;
+            // 3️⃣ Calculate per-subcategory distribution
+            $subcategoryCount = $subcategories->count();
+            $perSubcategory = intdiv($requiredTotal, $subcategoryCount);
+            $remainder = $requiredTotal % $subcategoryCount;
 
             $distribution = [];
-            foreach ($categoryIds as $catId) {
-                $distribution[$catId] = $perCategory;
-
+            foreach ($subcategories as $subId) {
+                $distribution[$subId] = $perSubcategory;
                 if ($remainder > 0) {
-                    $distribution[$catId]++;
+                    $distribution[$subId]++;
                     $remainder--;
                 }
             }
 
-            foreach ($options as $option) {
+            // 4️⃣ Loop through 4 fixed options
+            foreach (Option::all() as $option) {
 
                 $selectedQuestions = collect();
 
-                foreach ($distribution as $catId => $count) {
-                    $subcatIds = Subcategory::where('category_id', $catId)->pluck('id');
-
-                    $questions = Question::whereIn('subcategory_id', $subcatIds)
+                // Pick random questions per subcategory
+                foreach ($distribution as $subId => $count) {
+                    $subQuestions = Question::where('subcategory_id', $subId)
                         ->inRandomOrder()
                         ->take($count)
                         ->get();
 
-                    $selectedQuestions = $selectedQuestions->merge($questions);
+                    $selectedQuestions = $selectedQuestions->merge($subQuestions);
                 }
 
                 $selectedIds = $selectedQuestions->pluck('id')->unique();
 
                 if ($selectedIds->count() < $requiredTotal) {
-                    DB::rollBack();
-                    throw new \Exception("Недостаточно вопросов для варианта {$option->id}");
+                    throw new \Exception("Недостаточно вопросов для варианта {$option->name}");
                 }
 
-                $test = Test::where('option_id', $option->id)->first();
+                // 5️⃣ Create or update test
+                $test = Test::updateOrCreate(
+                    ['option_id' => $option->id, 'category_id' => $categoryId],
+                    ['time' => $time]
+                );
 
-                if (!$test) {
-                    $test = Test::create([
-                        'option_id' => $option->id,
-                    ]);
-                }
-
+                // 6️⃣ Attach questions
                 $test->questions()->sync($selectedIds);
             }
 
-            DB::commit();
-
-            return redirect()->route('tests.index')->with('success', __('messages.variants_created'));
-        } catch (\Exception $e) {
-            DB::rollBack();
-            report($e);
-
-            return back()
-                ->withErrors(['error' => $e->getMessage()])
-                ->withInput();
-        }
+            return redirect()
+                ->route('tests.index')
+                ->with('success', __('messages.variants_created'));
+        });
     }
-
 }
