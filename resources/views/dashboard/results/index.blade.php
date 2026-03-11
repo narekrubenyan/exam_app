@@ -19,7 +19,7 @@
     </div>
 
     <section class="content">
-        <div class="container-fluid"> 
+        <div class="container-fluid">
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
@@ -39,7 +39,6 @@
                                 <thead>
                                     <tr>
                                         <th>{{ __('dashboard.students.student') }}</th>
-                                        <th>{{ __('dashboard.categories.category') }}</th>
                                         <th>{{ __('dashboard.testResults.result') }}</th>
                                         <th>{{ __('dashboard.date') }}</th>
                                         <th>{{ __('dashboard.change') }}</th>
@@ -49,7 +48,6 @@
                                     @foreach($results as $result)
                                     <tr>
                                         <td>{{ $result->student->name }}</td>
-                                        <td class="text-truncate d-inline-block" style="max-width: 100px;">{{ $result->category }}</td>
                                         <td>{{ $result->score }}/20</td>
                                         <td>{{ $result->created_at->format('d.m.Y H:i') }}</td>
                                         <td>
@@ -59,9 +57,9 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                            
+
                             {{ $results->links() }}
-                            
+
                         </div>
                     @endif
 

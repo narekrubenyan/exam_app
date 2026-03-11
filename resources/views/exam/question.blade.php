@@ -2,7 +2,6 @@
 
 @section('content')
 <div class="container">
-
     <h5 class="h5">{{ $test['option'] }}</h5>
 
     <div class="card">
@@ -78,5 +77,35 @@
             </div>
         </div>
     </div>
+
+    <div id="timer" style="font-size:20px;font-weight:bold;color:red;"></div>
+
+    <script>
+
+        let examStart = {{ session('exam_start_time')->timestamp }};
+        let duration = {{ session('exam_end_time')->timestamp - session('exam_start_time')->timestamp }};
+
+        function updateTimer() {
+
+            let now = Math.floor(Date.now() / 1000);
+            let elapsed = now - examStart;
+            let remaining = duration - elapsed;
+
+            if (remaining <= 0) {
+                window.location.href = "{{ route('exam.results') }}";
+                return;
+            }
+
+            let minutes = Math.floor(remaining / 60);
+            let seconds = remaining % 60;
+
+            document.getElementById("timer").innerHTML =
+                "Ժամանակ․ " + minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
+        }
+
+        setInterval(updateTimer, 1000);
+        updateTimer();
+
+    </script>
 </div>
 @endsection

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->json('statements')->nullable();
             $table->json('possible_answers');
             $table->string('correct_answer');
-            $table->string('selected_answer');
+            $table->string('selected_answer')->nullable();
             $table->boolean('is_correct');
 
             $table->timestamps();

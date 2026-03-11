@@ -24,12 +24,12 @@ class QuestionSeeder extends Seeder
                     $incorrectAnswers = Answer::factory()->count(4)->make([
                         'is_correct' => false,
                     ]);
-        
+
                     $correctAnswer = Answer::factory()->make([
                         'is_correct' => true,
                     ]);
-        
-                    $allAnswers = $incorrectAnswers->push($correctAnswer)->shuffle();        
+
+                    $allAnswers = $incorrectAnswers->push($correctAnswer)->shuffle();
                     $question->answers()->saveMany($allAnswers);
                 });
         });

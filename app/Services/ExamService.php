@@ -60,22 +60,29 @@ class ExamService
 
             foreach ($questions as $question) {
 
-                $correctAnswer = $question->answers()->where('is_correct', true)->first()->text;
+                $correctAnswer = $question->answers()
+                    ->where('is_correct', true)
+                    ->value('text') ?? 'N/A';
 
-                $selected = $question->answers()
-                    ->where('id', $data['answered_questions'][$question->id]['selected'])
-                    ->first()->text;
+                $selectedId = data_get($data, "answered_questions.{$question->id}.selected");
+                $isCorrect = data_get($data, "answered_questions.{$question->id}.correct", 0);
 
-                $isCorrect = $data['answered_questions'][$question->id]['correct'];
+                if ($selectedId) {
+                    $selected = $question->answers()
+                        ->where('id', $selectedId)
+                        ->value('text') ?? 'Answer not found';
+                } else {
+                    $selected = null;
+                }
 
                 TestResultAnswer::create([
-                    'test_result_id' => $testResult->id,
-                    'question_title' => $question->title,
-                    'statements' => $question->statements,
+                    'test_result_id'   => $testResult->id,
+                    'question_title'   => $question->title,
+                    'statements'       => $question->statements,
                     'possible_answers' => $question->answers->pluck('text')->toArray(),
-                    'correct_answer' => $correctAnswer ?? 'UNKNOWN',
-                    'selected_answer' => $selected ?? 'UNKNOWN',
-                    'is_correct' => $isCorrect,
+                    'correct_answer'   => $correctAnswer,
+                    'selected_answer'  => $selected,
+                    'is_correct'       => $isCorrect,
                 ]);
             }
         });

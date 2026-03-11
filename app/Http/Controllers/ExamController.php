@@ -26,10 +26,12 @@ class ExamController extends Controller
 
         if (!session()->has('exam_questions')) {
             $questions = $student->test->questions()->pluck('id')->toArray();
+
             session([
                 'exam_questions' => $questions,
                 'current_index' => 0,
-                'correct_answers' => []
+                'correct_answers' => [],
+                'exam_start_time' => now()
             ]);
         }
 
@@ -45,7 +47,12 @@ class ExamController extends Controller
 
     public function showQuestion($index)
     {
-        $this->studentService->deactivate(session('student_id'));
+        $start = session('exam_start_time');
+        $end = session('exam_end_time');
+
+        if (!$start || !$end || now()->greaterThanOrEqualTo($end)) {
+            return redirect()->route('exam.results');
+        }
 
         $questions = session('exam_questions', []);
         if (!isset($questions[$index])) {

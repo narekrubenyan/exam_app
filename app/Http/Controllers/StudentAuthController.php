@@ -35,25 +35,37 @@ class StudentAuthController extends Controller
             return back()->withErrors(['error' => __('messages.student.not_found')]);
         }
 
-        $testId = $this->assignTest($request['category_id']);
+        if (!$student->test_id) {
+            $testId = $this->assignTest();
 
-        if ($testId) {
-            $student->update([
-                'test_id' => $testId
-            ]);
-        } else {
-            return redirect()
-                ->back()
-                ->withErrors(['error' => __('exam.testNotExist')])
-                ->withInput();
+            if (!$testId) {
+                return redirect()
+                    ->back()
+                    ->withErrors(['error' => __('exam.testNotExist')])
+                    ->withInput();
+            }
+
+            $student->test_id = $testId;
+            $student->save();
         }
 
-        session(['student_id' => $student->id, 'test_id' => $student->test_id]);
+        session([
+            'student_id' => $student->id,
+            'test_id' => $student->test_id
+        ]);
 
         $test = Test::with('category', 'option')->find(session('test_id'));
-        session(['test' => $test->toArray()]);
+        session([
+            'test' => $test->toArray(),
+            'exam_start_time' => now(),
+            'exam_end_time' => now()->addMinutes($test->time)
+        ]);
 
-        $questions = $student->test->questions()->pluck('questions.id')->toArray();
+        $questions = $student->test
+            ->questions()
+            ->pluck('questions.id')
+            ->toArray();
+
         session([
             'exam_questions' => $questions,
             'current_index' => 0,
@@ -63,32 +75,33 @@ class StudentAuthController extends Controller
         return redirect()->route('exam.question', ['index' => 0]);
     }
 
-    private function assignTest($categoryId)
+    private function assignTest()
     {
-        $testIds = Test::pluck('id')->toArray();
+        $tests = Test::pluck('id')->toArray();
 
-        if (empty($testIds)) {  
+        if (!$tests) {
             return false;
         }
 
-        $testCounts = Student::select('test_id')
-            ->whereNotNull('test_id')
-            ->where('test_id', 'in', $testIds)
+        $counts = Student::whereNotNull('test_id')
+            ->selectRaw('test_id, COUNT(*) as total')
             ->groupBy('test_id')
-            ->selectRaw('test_id, COUNT(*) as count')
-            ->pluck('count', 'test_id');
+            ->pluck('total', 'test_id')
+            ->toArray();
 
-        $minTest = $testIds[0];
-        $minCount = $testCounts[$minTest] ?? 0;
+        $selectedTest = null;
+        $minCount = PHP_INT_MAX;
 
-        foreach ($testIds as $testId) {
-            if (($testCounts[$testId] ?? 0) < $minCount) {
-                $minTest = $testId;
-                $minCount = $testCounts[$testId] ?? 0;
+        foreach ($tests as $testId) {
+            $count = $counts[$testId] ?? 0;
+
+            if ($count < $minCount) {
+                $minCount = $count;
+                $selectedTest = $testId;
             }
         }
 
-        return $minTest;
+        return $selectedTest;
     }
 
     public function logout()

@@ -51,9 +51,9 @@
                                                 <h6>{{ __('dashboard.questions.answers') }}</h6>
                                                 <div>
                                                     <ol>
-                                                        @foreach ($answer->possible_answers as $asw)                                                        
-                                                            <li 
-                                                                @if ($answer->is_correct && $asw == $answer->selected_answer) 
+                                                        @foreach ($answer->possible_answers as $asw)
+                                                            <li
+                                                                @if ($answer->is_correct && $asw == $answer->selected_answer)
                                                                     @class(['text-success'])
                                                                 @else
                                                                     @if ($asw == $answer->selected_answer)
@@ -65,7 +65,7 @@
                                                             >
                                                                 {{ $asw }}
                                                             </li>
-                                                        
+
                                                         @endforeach
                                                     </ol>
                                                 </div>

@@ -18,7 +18,7 @@
                     </ul>
                 </div>
             @endif
-            <form method="POST" action="/student/login">
+            <form method="POST" action="student/login">
                 @csrf
 
                 <div class="form-group">
