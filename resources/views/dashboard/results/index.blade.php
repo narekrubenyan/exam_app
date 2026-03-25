@@ -48,7 +48,7 @@
                                     @foreach($results as $result)
                                     <tr>
                                         <td>{{ $result->student->name }}</td>
-                                        <td>{{ $result->score }}/20</td>
+                                        <td>{{ $result->score }}/{{ $result->count }}</td>
                                         <td>{{ $result->created_at->format('d.m.Y H:i') }}</td>
                                         <td>
                                             <a href="{{ route('dashboard.results.show', $result->id) }}" class="btn btn-info">{{ __('dashboard.view') }}</a>

@@ -39,7 +39,7 @@ class TestService
                     $subQuestions = Question::where('subcategory_id', $subId)
                         ->inRandomOrder()
                         ->take($count)
-                        ->pluck('id'); // Just get IDs, much faster than get()
+                        ->pluck('id');
 
                     $selectedIds = $selectedIds->merge($subQuestions);
                 }

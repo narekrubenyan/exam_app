@@ -56,7 +56,7 @@ class ExamController extends Controller
 
         $questions = session('exam_questions', []);
         if (!isset($questions[$index])) {
-            return redirect()->route('exam.results');
+            return redirect()->route('exam.question', ['index' => 0 ]);
         }
 
         $question = Question::find($questions[$index]);

@@ -13,7 +13,7 @@ class TestResult extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['student_id', 'category', 'option', 'score'];
+    protected $fillable = ['student_id', 'category', 'option', 'count', 'score'];
 
     /**
      * Get the student that owns the TestResult

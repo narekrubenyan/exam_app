@@ -53,6 +53,7 @@ class ExamService
             $testResult = TestResult::create([
                 'student_id' => $data['student_id'],
                 'option' => $data['option'],
+                'count' => count($data['questions']),
                 'score' => $score,
             ]);
 

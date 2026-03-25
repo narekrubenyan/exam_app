@@ -31,6 +31,7 @@ return [
         'statement' => 'Պնդում',
         'statements' => 'Պնդումներ',
         'answers' => 'Պատասխաններ',
+        'answered' => 'Պատասխանված',
     ],
 
     'categories' => [
