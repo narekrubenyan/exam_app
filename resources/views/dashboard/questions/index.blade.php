@@ -74,7 +74,7 @@
                                                 <tr>
                                                     <td>{{ $loop->iteration }}.</td>
                                                     <td>{{ $question->title }}</td>
-                                                    <td>{{ $question->subcategory->name }}</td>
+                                                    <td>{{ $question->subcategory->name ?? null }}</td>
                                                     <td class="d-flex">
                                                         <span class="mr-1">
                                                             <a href="{{ route('questions.edit', $question->id) }}"

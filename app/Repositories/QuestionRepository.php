@@ -17,7 +17,7 @@ class QuestionRepository
         try {
             $question = Question::create([
                 'title' => $data['title'],
-                'category_id' => $data['category_id']
+                'subcategory_id' => $data['subcategory_id']
             ]);
 
             foreach ($data['answers'] as $answerData) {
@@ -47,7 +47,7 @@ class QuestionRepository
         } catch (\Exception $e) {
             DB::rollBack();
             report($e);
-        
+
             return redirect()
                 ->back()
                 ->withErrors(['error' => $e->getMessage()])
@@ -62,7 +62,7 @@ class QuestionRepository
         try {
             $question->update([
                 'title' => $data['title'],
-                'category_id' => $data['category_id']
+                'subcategory_id' => $data['subcategory_id']
             ]);
 
             Answer::where('question_id', $question->id)->delete();
@@ -94,7 +94,7 @@ class QuestionRepository
         } catch (\Exception $e) {
             DB::rollBack();
             report($e);
-        
+
             return redirect()
                 ->back()
                 ->withErrors(['error' => $e->getMessage()])
@@ -117,7 +117,7 @@ class QuestionRepository
         } catch (\Exception $e) {
             DB::rollBack();
             report($e);
-        
+
             return redirect()
                 ->back()
                 ->withErrors(['error' => $e->getMessage()])

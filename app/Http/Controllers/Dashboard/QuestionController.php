@@ -53,8 +53,9 @@ class QuestionController extends Controller
     public function create()
     {
         $categories = Category::select('id', 'name')->get();
+        $subcategories = Subcategory::select('id', 'name', 'category_id')->get();
 
-        return view('dashboard.questions.create', compact('categories'));
+        return view('dashboard.questions.create', compact('categories', 'subcategories'));
     }
 
     /**
@@ -76,8 +77,10 @@ class QuestionController extends Controller
     {
         $question = Question::with('answers', 'statements')->find($id);
         $categories = Category::select('id', 'name')->get();
+        $subcategories = Subcategory::select('id', 'name', 'category_id')->get();
 
-        return view('dashboard.questions.edit', compact('question', 'categories'));
+
+        return view('dashboard.questions.edit', compact('question', 'categories', 'subcategories'));
     }
 
     /**

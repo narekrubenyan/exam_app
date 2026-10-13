@@ -55,6 +55,28 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <label>{{ __('dashboard.select') . ' ' .  __('dashboard.subcategories.subcategory') }}</label>
+                                    <select name="subcategory_id" class="form-control">
+
+                                        @if (!$question->subcategory_id)
+                                            <option value="null" disabled selected>{{ __('dashboard.subcategories.chooseSubcategory') }}</option>
+                                        @endif
+
+                                        @foreach ($subcategories as $subcategory)
+                                            <option
+                                                value="{{ $subcategory->id }}"
+
+                                                @if ($question->subcategory_id && $question->subcategory_id == $subcategory->id)
+                                                    selected
+                                                @endif
+                                            >
+                                                {{ $subcategory->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
                                     <label for="questionText">{{ __('dashboard.questions.question') }}</label>
                                     <input
                                         type="text"
@@ -122,7 +144,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">
                                                     <input
-                                                        type="checkbox" name="answers[0][isTrue]"
+                                                        type="checkbox" name="answers[{{ $loop->iteration }}][isTrue]"
 
                                                         @if($answer->is_correct)
                                                             checked
@@ -131,7 +153,7 @@
                                                 </span>
                                             </div>
                                             <input
-                                                type="text" class="form-control" name="{{ $answer->text }}"
+                                                type="text" class="form-control" name="answers[{{ $loop->iteration }}][text]"
                                                 value="{{ $answer->text }}"
                                             >
                                         </div>

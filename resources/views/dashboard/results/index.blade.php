@@ -24,11 +24,6 @@
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">{{ __('dashboard.tests.testsTable') }}</h3>
-                        <div class="card-tools">
-                            <div>
-                                <a href="{{ route('tests.create') }}" class="btn btn-success">{{ __('dashboard.tests.generate') }}</a>
-                            </div>
-                        </div>
                     </div>
 
                     @if (!count($results))
@@ -47,7 +42,7 @@
                                 <tbody>
                                     @foreach($results as $result)
                                     <tr>
-                                        <td>{{ $result->student->name }}</td>
+                                        <td>{{ $result->student->name }} {{ $result->student->surname }}</td>
                                         <td>{{ $result->score }}/{{ $result->count }}</td>
                                         <td>{{ $result->created_at->format('d.m.Y H:i') }}</td>
                                         <td>

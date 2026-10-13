@@ -39,6 +39,16 @@
                                     </select>
                                 </div>
 
+                                 <div class="form-group">
+                                    <label>{{ __('dashboard.select') . ' ' .  __('dashboard.subcategories.subcategory') }}</label>
+                                    <select name="subcategory_id" class="form-control">
+                                        <option value="null" disabled selected>{{ __('dashboard.subcategories.chooseSubcategory') }}</option>
+                                        @foreach ($subcategories as $subcategory)
+                                            <option value="{{ $subcategory->id }}">{{ $subcategory->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
                                 <div class="form-group">
                                     <label for="questionText">{{ __('dashboard.questions.question') }}</label>
                                     <input

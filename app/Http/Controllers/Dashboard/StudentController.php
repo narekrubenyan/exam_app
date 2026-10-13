@@ -14,7 +14,7 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $students = Student::paginate(30);
+        $students = Student::latest()->paginate(30);
 
         return view('dashboard.students.index', compact('students'));
     }

@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AdminLTE 3 | Dashboard</title>
+    <title>Armedin | Dashboard</title>
 
     <link rel="stylesheet" href="{{ asset('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback') }}">
     <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
@@ -18,6 +18,8 @@
     <link rel="stylesheet" href="{{ asset('plugins/summernote/summernote-bs4.min.css') }}">
 
     <meta name="csrf-token" content="{{ csrf_token() }}" />
+
+    <link rel="icon" type="image/png" href="{{ asset('images/favicon.ico') }}"/>
 
     @yield('styles')
 
@@ -70,6 +72,16 @@
         </aside>
 
         <div class="content-wrapper">
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
             @yield('content')
         </div>
         <aside class="control-sidebar control-sidebar-dark">
