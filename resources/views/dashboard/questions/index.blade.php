@@ -72,7 +72,7 @@
                                         <tbody>
                                             @foreach ($questions as $question)
                                                 <tr>
-                                                    <td>{{ $loop->iteration }}.</td>
+                                                    <td>{{ $questions->firstItem() + $loop->index }}.</td>
                                                     <td>{{ $question->title }}</td>
                                                     <td>{{ $question->subcategory->name ?? null }}</td>
                                                     <td class="d-flex">

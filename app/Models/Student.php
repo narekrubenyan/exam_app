@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
-use App\Models\Test;
+use App\Models\Traits\Filterable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Student extends Model
 {
+    use Filterable;
     use HasFactory;
 
     /**
@@ -21,7 +22,7 @@ class Student extends Model
     /**
      * Get the test that owns the Student
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function test(): BelongsTo
     {

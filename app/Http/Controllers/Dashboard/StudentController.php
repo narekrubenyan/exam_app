@@ -2,19 +2,24 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Http\Filters\StudentFilter;
+use App\Http\Requests\Student\FilterRequest;
+use App\Http\Requests\Student\StoreRequest;
 use App\Models\Student;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StudentRequest;
 
 class StudentController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(FilterRequest $request)
     {
-        $students = Student::latest()->paginate(30);
+        $data = $request->validated();
+
+        $filter = app()->make(StudentFilter::class, ['queryParams' => array_filter($data)]);
+
+        $students = Student::filter($filter)->latest()->paginate(30);
 
         return view('dashboard.students.index', compact('students'));
     }
@@ -30,7 +35,7 @@ class StudentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StudentRequest $request)
+    public function store(StoreRequest $request)
     {
         $data = $request->validated();
 
@@ -52,7 +57,7 @@ class StudentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(StudentRequest $request, string $id)
+    public function update(StoreRequest $request, string $id)
     {
         $data = $request->validated();
 
