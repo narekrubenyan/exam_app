@@ -52,9 +52,6 @@
                                     @endforeach
                                 </tbody>
                             </table>
-
-                            {{ $results->links() }}
-
                         </div>
                     @endif
 

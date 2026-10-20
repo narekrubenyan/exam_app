@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Filters\StudentFilter;
-use App\Http\Requests\Student\FilterRequest;
-use App\Http\Requests\Student\StoreRequest;
+use App\Http\Requests\Student\FilterStudentRequest;
+use App\Http\Requests\Student\StoreStudentRequest;
 use App\Models\Student;
 use App\Http\Controllers\Controller;
 
@@ -13,7 +13,7 @@ class StudentController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(FilterRequest $request)
+    public function index(FilterStudentRequest $request)
     {
         $data = $request->validated();
 
@@ -35,7 +35,7 @@ class StudentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreRequest $request)
+    public function store(StoreStudentRequest $request)
     {
         $data = $request->validated();
 
@@ -57,7 +57,7 @@ class StudentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(StoreRequest $request, string $id)
+    public function update(StoreStudentRequest $request, string $id)
     {
         $data = $request->validated();
 

@@ -25,10 +25,10 @@
                 </div>
                 <div class="card-body">
                     <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                        <div class="row">
-                            <div class="col-sm-12 col-md-6">
-                                <form id="filterForm" method="GET" action="{{ route('questions.index') }}" class="d-flex gap-2 align-items-center">
-                                    <select name="category_id" id="categorySelect" class="form-select btn btn-default text-left" style="width: 200px;" onchange="this.form.submit()">
+                        <div class="row mb-3">
+                            <div class="col-sm-12 col-md-8">
+                                <form id="filterForm" method="GET" action="{{ url()->current() }}" class="d-flex gap-2 align-items-center">
+                                    <select name="category_id" id="categorySelect" class="form-select btn btn-default text-left mr-4" style="width: 200px;" onchange="this.form.submit()">
                                         <option value="">{{ __('dashboard.all') }} {{ __('dashboard.categories.categories') }}</option>
                                         @foreach($subcategories as $subcategory)
                                             <option value="{{ $subcategory->id }}" {{ request('category_id') == $subcategory->id ? 'selected' : '' }}>
@@ -37,18 +37,22 @@
                                         @endforeach
                                     </select>
 
-                                    <div class="input-group input-group-sm ml-2" style="width: 150px;">
-                                        <input type="text" name="table_search" class="form-control float-right" placeholder="Search"
-                                            value="{{ request('table_search') }}">
-                                        <div class="input-group-append">
-                                            <button type="submit" class="btn btn-default">
-                                                <i class="fas fa-search"></i>
-                                            </button>
-                                        </div>
-                                    </div>
+                                    <input
+                                        type="text"
+                                        name="title"
+                                        class="form-control float-right"
+                                        style="max-width: 200px;"
+                                        placeholder="Search"
+                                        value="{{ request('title') }}"
+                                    >
+
+                                    <button type="submit" class="btn btn-default">
+                                        <i class="fas fa-search"></i>
+                                    </button>
                                 </form>
                             </div>
-                            <div class="col-sm-12 col-md-6">
+
+                            <div class="col-sm-12 col-md-4 text-right">
                                 <a href="{{ route('questions.create') }}" class="btn btn-primary mr-2">
                                     {{ __('dashboard.questions.addQuestion') }}
                                 </a>

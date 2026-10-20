@@ -32,33 +32,35 @@
                     <div>
                         <h3 class="card-title">{{ __('dashboard.students.studentsTable') }}</h3>
                     </div>
-
-                    <div class="card-tools card-columns">
-
-                        <form method="GET" action="{{ url()->current() }}" class="input-group">
-                            <input
-                                type="text"
-                                name="name"
-                                class="form-control float.-right"
-                                placeholder="Search"
-                                value="{{ request('name') }}"
-                            >
-
-                            <button type="submit" class="btn btn-default">
-                                <i class="fas fa-search"></i>
-                            </button>
-                        </form>
-
-                        <div>
-                            <a href="{{ route('students.create') }}" class="btn btn-block btn-primary">{{ __('dashboard.students.addStudent') }}</a>
-                        </div>
-                    </div>
                 </div>
 
                 @if (!count($students))
                     <div class="card-body"><h1><b>0</b> {{ __('dashboard.students.student') }}</h1></div>
                 @else
                     <div class="card-body p-0">
+
+                        <div class="card-tools card-columns d-flex px-3 py-2">
+                            <form method="GET" action="{{ url()->current() }}" class="input-group">
+                                <input
+                                    type="text"
+                                    name="name"
+                                    class="form-control float.-right"
+                                    style="max-width: 200px;"
+                                    placeholder="Search"
+                                    value="{{ request('name') }}"
+                                >
+
+                                <button type="submit" class="btn btn-default">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </form>
+
+                            <div style="min-width: 230px;">
+                                <a href="{{ route('students.create') }}" class="btn btn-block btn-primary">{{ __('dashboard.students.addStudent') }}</a>
+                            </div>
+                        </div>
+
+
                         <table class="table table-striped">
                             <thead>
                                 <tr>

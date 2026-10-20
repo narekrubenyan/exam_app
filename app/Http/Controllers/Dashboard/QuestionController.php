@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Http\Controllers\Controller;
+use App\Http\Filters\QuestionFilter;
+use App\Http\Requests\Question\FilterQuestionRequest;
+use App\Http\Requests\Question\StoreQuestionRequest;
 use App\Models\Category;
 use App\Models\Question;
-use Illuminate\Http\Request;
-use App\Services\QuestionService;
-use App\Http\Controllers\Controller;
-use App\Http\Requests\FilterRequest;
-use Illuminate\Pagination\Paginator;
-use App\Http\Requests\QuestionRequest;
 use App\Models\Subcategory;
+use App\Services\QuestionService;
 
 class QuestionController extends Controller
 {
@@ -21,28 +20,15 @@ class QuestionController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(FilterRequest $request)
+    public function index(FilterQuestionRequest $request)
     {
         $data = $request->validated();
 
         $subcategories = Subcategory::select('id', 'name')->get();
 
-        $query = Question::with('subcategory');
+        $filter = app()->make(QuestionFilter::class, ['queryParams' => array_filter($data)]);
 
-        if ($request->query('category_id')) {
-            $query->where('subcategory_id', $request->query('category_id'));
-        }
-
-        if ($request->query('table_search')) {
-            $query->where('title', 'like', '%' . $request->query('table_search') . '%');
-        }
-
-        $questions = $query->orderBy('id', 'desc')->paginate(30)->withQueryString();
-
-        $currentPage = Paginator::resolveCurrentPage();
-        if ($currentPage > $questions->lastPage()) {
-            return redirect()->route('questions.index', ['page' => 1]);
-        }
+        $questions = Question::filter($filter)->latest()->paginate(30);
 
         return view('dashboard.questions.index', compact('questions', 'subcategories'));
     }
@@ -61,7 +47,7 @@ class QuestionController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(QuestionRequest $request)
+    public function store(StoreQuestionRequest $request)
     {
         $data = $request->validated();
 
@@ -86,7 +72,7 @@ class QuestionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(QuestionRequest $request, Question $question)
+    public function update(StoreQuestionRequest $request, Question $question)
     {
         $data = $request->validated();
 
