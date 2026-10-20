@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use App\Models\Test;
-use App\Models\Category;
-use App\Services\TestService;
-use App\Http\Requests\TestRequest;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\TestResult\StoreTestRequest;
+use App\Models\Category;
+use App\Models\Test;
+use App\Services\TestService;
 
 class TestController extends Controller
 {
@@ -35,7 +35,7 @@ class TestController extends Controller
         return view('dashboard.tests.create', compact('categories'));
     }
 
-    public function store(TestRequest $request)
+    public function store(StoreTestRequest $request)
     {
         $data = $request->validated();
 

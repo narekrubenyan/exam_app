@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Student;
 use App\Models\TestResultAnswer;
+use App\Models\Traits\Filterable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;

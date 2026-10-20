@@ -33,6 +33,29 @@
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
+                                    <th>
+
+                                        <form method="GET" action="{{ url()->current() }}" class="input-group">
+                                            <input
+                                               type="text"
+                                               name="name"
+                                               class="form-control float-right"
+                                               style="max-width: 200px;"
+                                               placeholder="Search"
+                                               value="{{ request('name') }}"
+                                            >
+
+                                            <button type="submit" class="btn btn-default">
+                                               <i class="fas fa-search"></i>
+                                            </button>
+                                        </form>
+
+                                    </th>
+                                        <th></th>
+                                        <th> {{-- TODO search by date --}} </th>
+                                        <th></th>
+                                    </tr>
+                                    <tr>
                                         <th>{{ __('dashboard.students.student') }}</th>
                                         <th>{{ __('dashboard.testResults.result') }}</th>
                                         <th>{{ __('dashboard.date') }}</th>
